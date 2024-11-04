@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import App from './App.jsx'
 import AddTodo from '../components/AddTodo.jsx';
+import Todos from '../components/Todos.jsx';
 
 
 const router = createBrowserRouter([
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
   {
     path: "/addTodo",
     element: <AddTodo/>,
+  },
+  {
+    path: "/AllTodos",
+    element: <Todos/>,
   },
 ]);
 
