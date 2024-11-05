@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import SideNav from './SideNav'
 
 const AddTodo = () => {
-    const [Input, setInput] = useState({ title: "", deadline: "", desc: "" });
+    const [Input, setInput] = useState({id:"", title: "", deadline: "", desc: "" });
     const [Data, setData] = useState([]);
     useEffect(() => {
         const savedTodos = localStorage.getItem("todo");
@@ -17,6 +17,7 @@ const AddTodo = () => {
 
     const submitData = (e) => {
         e.preventDefault();
+        Input.id=Data.length+1;
         const updatedData = [...Data, Input];
         setData(updatedData);
         localStorage.setItem("todo", JSON.stringify(updatedData));

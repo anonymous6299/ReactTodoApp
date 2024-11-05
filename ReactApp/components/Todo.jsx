@@ -1,17 +1,20 @@
+import { useNavigate } from "react-router-dom"
+
 
 
 const Todo = ({props}) => {
+    const navigate = useNavigate();
     return (
         <>
             <div className='border border-[#c5c5c5] w-80 bg-[#F9FAFB] rounded-xl px-4 py-4 hover:shadow-lg'>
                 <div className='deadline'>
-                    <p className='text-2xl font-bold hover:underline hover:cursor-pointer w-fit'>{props.item.deadline}</p>
+                    <p className='text-2xl font-bold hover:underline hover:cursor-pointer w-fit' onClick={()=>{navigate(`/UpdTodo/${props.item.id}`)}}>{props.item.deadline}</p>
                     <p className='text-2xl font-bold text-red-600'>Time Elapsed</p>
                 </div>
                 <hr className='my-2 border-[#E5E7EB]' />
                 <div className='flex w-full justify-between items-center'>
                     <div>
-                        <p className='text-lg font-medium hover:underline hover:cursor-pointer'>{props.item.title}</p>
+                        <p className='text-lg font-medium hover:underline hover:cursor-pointer' onClick={()=>{navigate(`/UpdTodo/${props.item.id}`)}}>{props.item.title}</p>
                         <p className='text-sm'>{props.item.desc}</p>
                     </div>
                     <div className='border border-black rounded-full p-1 hover:cursor-pointer' onClick={()=>{props.DelTodo(props.item.title)}}>
