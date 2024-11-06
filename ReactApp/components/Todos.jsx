@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SideNav from './SideNav'
 import Todo from './Todo'
 
@@ -9,12 +9,18 @@ const Todos = () => {
             setTodos(JSON.parse(localStorage.getItem("todo")));
         }
     }, [])
-    const DelTodo = (title) => {
-        const newTodos = Todos.filter((item)=>{
-            return item.title!==title;
+    const DelTodo = (id) => {
+        const arr = [];
+        const newTodo = Todos.find((item) => {
+            return item.id == id;
+        })
+        const newTodos = Todos.filter((item) => {
+            return item.id !== id;
         })
         setTodos(newTodos);
-        localStorage.setItem("todo",JSON.stringify(newTodos));
+        localStorage.setItem("todo", JSON.stringify(newTodos))
+        arr.push(newTodo);
+        localStorage.setItem("bin", JSON.stringify(arr))
     }
     return (
         <div className='flex'>
@@ -23,9 +29,9 @@ const Todos = () => {
                 <p className='text-center text-3xl my-20'>Your Todos</p>
                 <div className='mx-20'>
                     {
-                        Todos.length!==0?Todos.map((item,index)=>{
-                            return <Todo key={index} props={{item,DelTodo}}/>
-                        }):<p>No Todos Found.</p>
+                        Todos.length !== 0 ? Todos.map((item, index) => {
+                            return <Todo key={index} props={{ item, DelTodo, bin: false }} />
+                        }) : <p>No Todos Found.</p>
                     }
                 </div>
             </div>

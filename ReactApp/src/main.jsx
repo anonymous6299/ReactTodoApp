@@ -9,6 +9,7 @@ import App from './App.jsx'
 import AddTodo from '../components/AddTodo.jsx';
 import Todos from '../components/Todos.jsx';
 import UpdTodo from '../components/UpdTodo.jsx';
+import Bin from '../components/Bin.jsx';
 
 
 const router = createBrowserRouter([
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: "/UpdTodo/:id",
     element: <UpdTodo/>,
+  },
+  {
+    path: "/bin",
+    element: <Bin/>,
   },
 ]);
 
