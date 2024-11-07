@@ -39,7 +39,7 @@ const AddTodo = () => {
                         </div>
                         <div className='input flex flex-col'>
                             <label htmlFor="priority">Priority</label>
-                            <input type="text" className='bg-[#F9FAFB] border border-[#D1D5DB] text-[#1F2937] focus:outline-none w-16 h-12 rounded-lg px-2' id='priority' name='priority' value={Input.priority} onChange={onChange} />
+                            <input type="text" className='bg-[#F9FAFB] border border-[#D1D5DB] text-[#1F2937] focus:outline-none w-16 h-12 rounded-lg px-2' id='priority' name='priority' value={Input.priority} onChange={onChange} autoComplete='off'/>
                         </div>
                     </div>
                     <div className='input w-fit mx-auto flex flex-col'>

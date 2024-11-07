@@ -4,12 +4,16 @@ import Todo from './Todo'
 
 const Todos = () => {
     const [Todos, setTodos] = useState([]);
+    const [BinTodos, setBinTodos] = useState([]);
     const [MLeft, setMLeft] = useState("ml-[10rem]");
     const [Left, setLeft] = useState("left-[0%]")
     const [SelDis, setSelDis] = useState(false)
     useEffect(() => {
         if (JSON.parse(localStorage.getItem("todo"))) {
             setTodos(JSON.parse(localStorage.getItem("todo")));
+        }
+        if (JSON.parse(localStorage.getItem("bin"))) {
+            setBinTodos(JSON.parse(localStorage.getItem("bin")));
         }
     }, [])
     const DelTodo = (id) => {
@@ -33,27 +37,27 @@ const Todos = () => {
                 <div className='nav my-10'>
                     <div className="priorityNav flex w-full justify-between px-40">
                         <div>
-                            <button className='w-56 flex justify-between px-8' onClick={() => { setMLeft("ml-[10rem]"); setSelDis(false);setLeft("left-[0%]") }}>
+                            <button className='w-56 flex justify-between items-center px-8' onClick={() => { setMLeft("ml-[10rem]"); setSelDis(false);setLeft("left-[0%]") }}>
                                 <p className='font-medium'>ALL TODOS</p>
-                                <p className='border border-black w-fit rounded-full px-1'>10</p>
+                                <p className='border border-black w-6 rounded-full'>10</p>
                             </button>
                         </div>
                         <div>
-                            <button className='w-56 flex justify-between px-8' onClick={() => { setMLeft("ml-[26.6rem]"); setSelDis(true);setLeft("left-[-100%]")}}>
+                            <button className='w-56 flex justify-between items-center px-8' onClick={() => { setMLeft("ml-[26.6rem]"); setSelDis(true);setLeft("left-[-100%]")}}>
                                 <p className='font-medium'>PENDING</p>
-                                <p className='border border-black w-fit rounded-full px-1'>10</p>
+                                <p className='border border-black w-6 rounded-full'>10</p>
                             </button>
                         </div>
                         <div>
-                            <button className='w-56 flex justify-between px-8' onClick={() => { setMLeft("ml-[43.4rem]"); setSelDis(false);setLeft("left-[-200%]")}}>
+                            <button className='w-56 flex justify-between items-center px-8' onClick={() => { setMLeft("ml-[43.4rem]"); setSelDis(false);setLeft("left-[-200%]")}}>
                                 <p className='font-medium'>COMPLETED</p>
-                                <p className='border border-black w-fit rounded-full px-1'>10</p>
+                                <p className='border border-black w-6 rounded-full'>10</p>
                             </button>
                         </div>
                         <div>
-                            <button className='w-56 flex justify-between px-8' onClick={() => { setMLeft("ml-[60rem]"); setSelDis(false);setLeft("left-[-300%]")}}>
+                            <button className='w-56 flex justify-between items-center px-8' onClick={() => { setMLeft("ml-[60rem]"); setSelDis(false);setLeft("left-[-300%]")}}>
                                 <p className='font-medium'>IN BIN</p>
-                                <p className='border border-black w-fit rounded-full px-1'>10</p>
+                                <p className='border border-black w-6 rounded-full'>{BinTodos.length}</p>
                             </button>
                         </div>
                     </div>
@@ -69,7 +73,7 @@ const Todos = () => {
                         </div>
                     </div>
                 </div>
-                <div className={` w-full relative ${Left} transition-all`} style={{zIndex:"-1"}}>
+                <div className={` w-full h-[64%] z-10 relative ${Left} transition-all`}>        
                     <div className=' absolute w-full px-28 flex space-x-12 flex-wrap left-[0%]'>
                         {
                             Todos.length !== 0 ? Todos.map((item, index) => {
@@ -77,27 +81,28 @@ const Todos = () => {
                             }) : <p>No Todos Found.</p>
                         }
                     </div>
-                    <div className=' absolute w-full px-28 left-[100%]'>
+                    <div className=' absolute w-full px-28 flex space-x-12 flex-wrap left-[100%]'>
                         {
                             Todos.length !== 0 ? Todos.map((item, index) => {
                                 return <Todo key={index} props={{ item, DelTodo, bin: false }} />
                             }) : <p>No Todos Found.</p>
                         }
                     </div>
-                    <div className=' absolute w-full px-28 left-[200%]'>
+                    <div className=' absolute w-full px-28 flex space-x-12 flex-wrap left-[200%]'>
                         {
                             Todos.length !== 0 ? Todos.map((item, index) => {
                                 return <Todo key={index} props={{ item, DelTodo, bin: false }} />
                             }) : <p>No Todos Found.</p>
                         }
                     </div>
-                    <div className=' absolute w-full px-28 left-[300%]'>
+                    <div className=' absolute w-full px-28 flex space-x-12 flex-wrap left-[300%]'>
                         {
-                            Todos.length !== 0 ? Todos.map((item, index) => {
+                            BinTodos.length !== 0 ? BinTodos.map((item, index) => {
                                 return <Todo key={index} props={{ item, DelTodo, bin: false }} />
                             }) : <p>No Todos Found.</p>
                         }
                     </div>
+
                 </div>
             </div>
         </div>
