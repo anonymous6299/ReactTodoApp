@@ -58,6 +58,36 @@ const Todos = () => {
         arr.push(newTodo);
         localStorage.setItem("bin", JSON.stringify(arr))
     }
+    const MarkAsComplete = (id) => {
+        const arr = Todos;
+        const todo = Todos.find((item)=>{
+            return item.id===id;
+        })
+        const ind = arr.indexOf(todo);
+        todo.completed=true
+        arr[ind]=todo;
+        setTodos(arr);
+        setCompletedTodos([...CompletedTodos,todo])
+        if (todo.priority.includes("h")) {
+            const arr = HPriorityTodos.filter((item)=>{
+                return item.id!==id
+            })
+            setHPriorityTodos(arr);
+        }
+        else if (todo.priority.includes("m")) {
+            const arr = MPriorityTodos.filter((item)=>{
+                return item.id!==id
+            })
+            setMPriorityTodos(arr);
+        }
+        else {
+            const arr = LPriorityTodos.filter((item)=>{
+                return item.id!==id
+            })
+            setLPriorityTodos(arr);
+        }
+        localStorage.setItem("todo",JSON.stringify(arr));
+    }
     return (
         <div className='flex'>
             <div><SideNav /></div>
@@ -101,11 +131,11 @@ const Todos = () => {
                         </div>
                     </div>
                 </div>
-                <div className={` w-full h-[64%] z-10 relative ${Left} transition-all`}>
+                <div className={` w-full h-[62%] z-10 relative ${Left} transition-all`}>
                     <div className=' absolute w-full px-28 flex space-x-12 flex-wrap left-[0%]'>
                         {
                             Todos.length !== 0 ? Todos.map((item, index) => {
-                                return <Todo key={index} props={{ item, DelTodo, bin: false }} />
+                                return <Todo key={index} props={{ item, DelTodo, bin: false, MarkAsComplete }} />
                             }) : <p>No Todos Found.</p>
                         }
                     </div>
@@ -113,21 +143,21 @@ const Todos = () => {
                         <div className={Priority === "h" ? "block" : "hidden"}>
                             {
                                 HPriorityTodos.length !== 0 ? Todos.map((item, index) => {
-                                    return <Todo key={index} props={{ item, DelTodo, bin: false }} />
+                                    return <Todo key={index} props={{ item, DelTodo, bin: false, MarkAsComplete }} />
                                 }) : <p>No Todos Found.</p>
                             }
                         </div>
                         <div className={Priority === "m" ? "block" : "hidden"}>
                             {
                                 MPriorityTodos.length !== 0 ? Todos.map((item, index) => {
-                                    return <Todo key={index} props={{ item, DelTodo, bin: false }} />
+                                    return <Todo key={index} props={{ item, DelTodo, bin: false, MarkAsComplete }} />
                                 }) : <p>No Todos Found.</p>
                             }
                         </div>
                         <div className={Priority === "l" ? "block" : "hidden"}>
                             {
                                 LPriorityTodos.length !== 0 ? Todos.map((item, index) => {
-                                    return <Todo key={index} props={{ item, DelTodo, bin: false }} />
+                                    return <Todo key={index} props={{ item, DelTodo, bin: false, MarkAsComplete }} />
                                 }) : <p>No Todos Found.</p>
                             }
                         </div>
