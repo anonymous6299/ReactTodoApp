@@ -6,16 +6,17 @@ import { useNavigate } from 'react-router-dom'
 const Todos = () => {
     const nav = useNavigate();
     const [Todos, setTodos] = useState([]);
-    const [BinTodos, setBinTodos] = useState([]);
-    const [MLeft, setMLeft] = useState("ml-[10rem]");
     const [Left, setLeft] = useState("left-[0%]")
     const [SelDis, setSelDis] = useState(false);
     const [CompletedTodos, setCompletedTodos] = useState([]);
-    const [PendingTodos, setPendingTodos] = useState([]);
-    const [Priority, setPriority] = useState("h")
-    const [HPriorityTodos, setHPriorityTodos] = useState([])
-    const [LPriorityTodos, setLPriorityTodos] = useState([])
-    const [MPriorityTodos, setMPriorityTodos] = useState([])
+    const [Priority, setPriority] = useState("h");
+    const [HPriorityTodos, setHPriorityTodos] = useState([]);
+    const [LPriorityTodos, setLPriorityTodos] = useState([]);
+    const [MPriorityTodos, setMPriorityTodos] = useState([]);
+    const [BorderA, setBorderA] = useState(true);
+    const [BorderB, setBorderB] = useState(false);
+    const [BorderC, setBorderC] = useState(false);
+    const [BorderD, setBorderD] = useState(false);
 
     useEffect(() => {
         if (JSON.parse(localStorage.getItem("todo"))) {
@@ -25,24 +26,23 @@ const Todos = () => {
             })
             setCompletedTodos(arr);
             arr = JSON.parse(localStorage.getItem("todo")).filter((item) => {
-                return item.completed === false;
-            })
-            setPendingTodos(arr);
-            arr = JSON.parse(localStorage.getItem("todo")).filter((item) => {
-                return item.priority.includes("h");
+                if (item.completed === false) {
+                    return item.priority.includes("h")
+                }
             });
             setHPriorityTodos(arr);
             arr = JSON.parse(localStorage.getItem("todo")).filter((item) => {
-                return item.priority.includes("m");
+                if (item.completed === false) {
+                    return item.priority.includes("m")
+                }
             });
             setMPriorityTodos(arr);
             arr = JSON.parse(localStorage.getItem("todo")).filter((item) => {
-                return item.priority.includes("l");
+                if (item.completed === false) {
+                    return item.priority.includes("l")
+                }
             });
             setLPriorityTodos(arr);
-        }
-        if (JSON.parse(localStorage.getItem("bin"))) {
-            setBinTodos(JSON.parse(localStorage.getItem("bin")));
         }
     }, [])
     const DelTodo = (id) => {
@@ -66,31 +66,30 @@ const Todos = () => {
                 <div className='nav my-10'>
                     <div className="priorityNav flex w-full justify-between px-40">
                         <div>
-                            <button className='w-56 flex justify-between items-center px-8' onClick={() => { setMLeft("ml-[10rem]"); setSelDis(false); setLeft("left-[0%]") }}>
+                            <button className={`w-56 flex justify-between items-center px-8 rounded-md ${BorderA ? "border-2" : ""} border-black py-2`} onClick={() => { setSelDis(false); setLeft("left-[0%]"); setBorderA(true); setBorderB(false); setBorderC(false); setBorderD(false) }}>
                                 <p className='font-medium'>ALL TODOS</p>
                                 <p className='border border-black w-6 rounded-full'>{Todos.length}</p>
                             </button>
                         </div>
                         <div>
-                            <button className='w-56 flex justify-between items-center px-8' onClick={() => { setMLeft("ml-[26.6rem]"); setSelDis(true); setLeft("left-[-100%]") }}>
+                            <button className={`w-56 flex justify-between items-center px-8 rounded-md ${BorderB ? "border-2" : ""} border-black py-2`} onClick={() => { setSelDis(true); setLeft("left-[-100%]"); setBorderA(false); setBorderB(true); setBorderC(false); setBorderD(false) }}>
                                 <p className='font-medium'>PENDING</p>
-                                <p className='border border-black w-6 rounded-full'>{PendingTodos.length}</p>
+                                <p className='border border-black w-6 rounded-full'>{HPriorityTodos.length + LPriorityTodos.length + MPriorityTodos.length}</p>
                             </button>
                         </div>
                         <div>
-                            <button className='w-56 flex justify-between items-center px-8' onClick={() => { setMLeft("ml-[43.4rem]"); setSelDis(false); setLeft("left-[-200%]") }}>
+                            <button className={`w-56 flex justify-between items-center px-8 rounded-md ${BorderC ? "border-2" : ""} border-black py-2`} onClick={() => { setSelDis(false); setLeft("left-[-200%]"); setBorderA(false); setBorderB(false); setBorderC(true); setBorderD(false) }}>
                                 <p className='font-medium'>COMPLETED</p>
                                 <p className='border border-black w-6 rounded-full'>{CompletedTodos.length}</p>
                             </button>
                         </div>
                         <div>
-                            <button className='w-56 flex justify-between items-center px-8' onClick={() => { setMLeft("ml-[60rem]"); setSelDis(false); setLeft("left-[-300%]") }}>
+                            <button className={`w-56 flex justify-between items-center px-8 rounded-md ${BorderD ? "border-2" : ""} border-black py-2`} onClick={() => { setSelDis(false); setLeft("left-[-300%]"); setBorderA(false); setBorderB(false); setBorderC(false); setBorderD(true) }}>
                                 <p className='font-medium'>IN BIN</p>
-                                <p className='border border-black w-6 rounded-full'>{BinTodos.length}</p>
+                                <p className='border border-black w-6 rounded-full'>{JSON.parse(localStorage.getItem("bin")).length}</p>
                             </button>
                         </div>
                     </div>
-                    <div className={`border border-black w-56 my-3 transition-all ${MLeft}`}></div>
                     <div className={`select flex justify-end mx-52 ${SelDis ? "block" : "hidden"}`}>
                         <div className='flex flex-col'>
                             <label htmlFor="priority" className='mx-1 my-1'>Priority:</label>
@@ -111,21 +110,21 @@ const Todos = () => {
                         }
                     </div>
                     <div className=' absolute w-full px-28 flex space-x-12 flex-wrap left-[100%]'>
-                        <div className={Priority==="h"?"block":"hidden"}>
+                        <div className={Priority === "h" ? "block" : "hidden"}>
                             {
                                 HPriorityTodos.length !== 0 ? Todos.map((item, index) => {
                                     return <Todo key={index} props={{ item, DelTodo, bin: false }} />
                                 }) : <p>No Todos Found.</p>
                             }
                         </div>
-                        <div className={Priority==="m"?"block":"hidden"}>
+                        <div className={Priority === "m" ? "block" : "hidden"}>
                             {
                                 MPriorityTodos.length !== 0 ? Todos.map((item, index) => {
                                     return <Todo key={index} props={{ item, DelTodo, bin: false }} />
                                 }) : <p>No Todos Found.</p>
                             }
                         </div>
-                        <div className={Priority==="l"?"block":"hidden"}>
+                        <div className={Priority === "l" ? "block" : "hidden"}>
                             {
                                 LPriorityTodos.length !== 0 ? Todos.map((item, index) => {
                                     return <Todo key={index} props={{ item, DelTodo, bin: false }} />
@@ -141,7 +140,13 @@ const Todos = () => {
                         }
                     </div>
                     <div className=' absolute w-full px-28 flex space-x-12 flex-wrap left-[300%]'>
-                    <div className="btn flex justify-center w-full my-20"><button className='bg-[#2563EB] px-4 py-2 rounded-md text-white hover:bg-[#1D4ED8]' onClick={()=>{nav("/bin")}}>Go To Bin</button></div>
+                        <div className="btn flex justify-center w-full my-20"><button className='bg-[#2563EB] px-4 py-2 rounded-md text-white hover:bg-[#1D4ED8] flex items-center' onClick={() => { nav("/bin") }}>
+                            <p>Go To Bin</p>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 ml-2">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                            </svg>
+
+                        </button></div>
                     </div>
 
                 </div>
