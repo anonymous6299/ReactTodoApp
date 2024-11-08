@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import SideNav from './SideNav'
 
 const AddTodo = () => {
-    const [Input, setInput] = useState({ id: "", title: "", deadline: "", desc: "", priority: ""});
+    const [Input, setInput] = useState({ id: "", title: "", deadline: "", desc: "", priority: "",completed:false});
     const [Data, setData] = useState([]);
     useEffect(() => {
         const savedTodos = localStorage.getItem("todo");
@@ -46,7 +46,7 @@ const AddTodo = () => {
                         <label htmlFor="desc">Todo Description</label>
                         <textarea className='resize-none w-[55rem] h-40 focus:outline-none border border-[#D1D5DB] bg-[#F9FAFB] rounded-lg px-2 py-4' id='desc' name='desc' value={Input.desc} onChange={onChange}></textarea>
                     </div>
-                    <div className="btn flex justify-end px-60"><button className='bg-[#3B82F6] px-4 py-2 rounded-md text-white hover:bg-[#2563EB]' onClick={submitData}>Add Todo</button></div>
+                    <div className="btn flex justify-end px-60"><button className='bg-[#2563EB] px-4 py-2 rounded-md text-white hover:bg-[#1D4ED8]' onClick={submitData}>Add Todo</button></div>
                 </form>
             </div>
         </div>
