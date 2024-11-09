@@ -50,13 +50,35 @@ const Todos = () => {
         const newTodo = Todos.find((item) => {
             return item.id == id;
         })
+        if (newTodo.priority.includes("h")) {
+            const arr = HPriorityTodos.filter((item)=>{
+                return item.id!==newTodo.id;
+            })
+            setHPriorityTodos(arr);
+        }
+        else if (newTodo.priority.includes("m")) {
+            const arr = MPriorityTodos.filter((item)=>{
+                return item.id!==newTodo.id;
+            })
+            setMPriorityTodos(arr);
+        }
+        else{
+            const arr = LPriorityTodos.filter((item)=>{
+                return item.id!==newTodo.id;
+            })
+            setLPriorityTodos(arr);
+        }
         const newTodos = Todos.filter((item) => {
             return item.id !== id;
         })
+        const NcomTodos = CompletedTodos.filter((item)=>{
+            return item.id!==id
+        })
         setTodos(newTodos);
-        localStorage.setItem("todo", JSON.stringify(newTodos))
+        setCompletedTodos(NcomTodos);
+        localStorage.setItem("todo", JSON.stringify(newTodos));
         arr.push(newTodo);
-        localStorage.setItem("bin", JSON.stringify(arr))
+        localStorage.setItem("bin", JSON.stringify(arr));
     }
     const MarkAsComplete = (id) => {
         const arr = Todos;
@@ -132,32 +154,32 @@ const Todos = () => {
                     </div>
                 </div>
                 <div className={` w-full h-[62%] z-10 relative ${Left} transition-all`}>
-                    <div className=' absolute w-full px-28 flex space-x-12 flex-wrap left-[0%]'>
+                    <div className=' absolute w-full pl-16 flex flex-wrap left-[0%] h-96 overflow-y-scroll'>
                         {
                             Todos.length !== 0 ? Todos.map((item, index) => {
-                                return <Todo key={index} props={{ item, DelTodo, bin: false, MarkAsComplete }} />
+                                return <div className='mx-3 my-3' key={index}><Todo props={{ item, DelTodo, bin: false, MarkAsComplete }} /></div>
                             }) : <p>No Todos Found.</p>
                         }
                     </div>
-                    <div className=' absolute w-full px-28 flex space-x-12 flex-wrap left-[100%]'>
-                        <div className={Priority === "h" ? "block" : "hidden"}>
+                    <div className=' absolute w-full px-28 left-[100%]'>
+                        <div className={`${Priority === "h" ? "block" : "hidden"} flex flex-wrap`}>
                             {
-                                HPriorityTodos.length !== 0 ? Todos.map((item, index) => {
-                                    return <Todo key={index} props={{ item, DelTodo, bin: false, MarkAsComplete }} />
+                                HPriorityTodos.length !== 0 ? HPriorityTodos.map((item, index) => {
+                                    return <div className='mx-3 my-3' key={index} > <Todo props={{ item, DelTodo, bin: false, MarkAsComplete }} /></div>
                                 }) : <p>No Todos Found.</p>
                             }
                         </div>
-                        <div className={Priority === "m" ? "block" : "hidden"}>
+                        <div className={`${Priority === "m" ? "block" : "hidden"} flex flex-wrap`}>
                             {
-                                MPriorityTodos.length !== 0 ? Todos.map((item, index) => {
-                                    return <Todo key={index} props={{ item, DelTodo, bin: false, MarkAsComplete }} />
+                                MPriorityTodos.length !== 0 ? MPriorityTodos.map((item, index) => {
+                                    return <div className='mx-3 my-3' key={index} > <Todo props={{ item, DelTodo, bin: false, MarkAsComplete }} /></div>
                                 }) : <p>No Todos Found.</p>
                             }
                         </div>
-                        <div className={Priority === "l" ? "block" : "hidden"}>
+                        <div className={`${Priority === "l" ? "block" : "hidden"} flex flex-wrap`}>
                             {
-                                LPriorityTodos.length !== 0 ? Todos.map((item, index) => {
-                                    return <Todo key={index} props={{ item, DelTodo, bin: false, MarkAsComplete }} />
+                                LPriorityTodos.length !== 0 ? LPriorityTodos.map((item, index) => {
+                                    return <div className='mx-3 my-3' key={index} > <Todo props={{ item, DelTodo, bin: false, MarkAsComplete }} /></div>
                                 }) : <p>No Todos Found.</p>
                             }
                         </div>

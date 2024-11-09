@@ -1,6 +1,13 @@
-import React from 'react'
-
-const HomeBottomSec = () => {
+import  { useEffect, useState } from 'react'
+import Todo from './Todo'
+const HomeBottomSec = (props) => {
+    const [Arr, setArr] = useState([]);
+    useEffect(() => {
+        const todos = props.todos;
+        const arr = todos.reverse();
+        setArr(arr.slice(0,4));
+    }, [props.todos])
+    
     return (
         <div className="pr-10">
             <div className='flex w-full justify-between'>
@@ -14,6 +21,13 @@ const HomeBottomSec = () => {
                     </button>
                 </div>
 
+            </div>
+            <div className='w-full flex justify-between mx-4 my-16'>
+                {
+                    Arr.map((item,index)=>{
+                        return <Todo key={index} props={{ item, bin: false }} />
+                    })
+                }
             </div>
         </div>
     )

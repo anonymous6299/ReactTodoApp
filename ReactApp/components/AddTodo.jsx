@@ -20,6 +20,7 @@ const AddTodo = () => {
         Input.id = Data.length + 1;
         const updatedData = [...Data, Input];
         setData(updatedData);
+        setInput({ id: "", title: "", deadline: "", desc: "", priority: "",completed:false})
         localStorage.setItem("todo", JSON.stringify(updatedData));
     };
     return (
@@ -27,7 +28,7 @@ const AddTodo = () => {
             <SideNav />
             <div className="form w-full">
                 <p className='text-center text-3xl my-20'>Add a Todo</p>
-                <form className='space-y-4 w-full'>
+                <form className='space-y-4 w-fit mx-auto'>
                     <div className='flex w-fit mx-auto space-x-2'>
                         <div className='input flex flex-col'>
                             <label htmlFor="title">Todo Title</label>
@@ -46,7 +47,7 @@ const AddTodo = () => {
                         <label htmlFor="desc">Todo Description</label>
                         <textarea className='resize-none w-[55rem] h-40 focus:outline-none border border-[#D1D5DB] bg-[#F9FAFB] rounded-lg px-2 py-4' id='desc' name='desc' value={Input.desc} onChange={onChange}></textarea>
                     </div>
-                    <div className="btn flex justify-end px-60"><button className='bg-[#2563EB] px-4 py-2 rounded-md text-white hover:bg-[#1D4ED8]' onClick={submitData}>Add Todo</button></div>
+                    <div className="btn flex justify-end"><button className='bg-[#2563EB] disabled:bg-[#3B82F6] px-4 py-2 rounded-md text-white hover:bg-[#1D4ED8]' disabled={Input.title===""||Input.deadline===""||Input.desc===""||Input.priority===""} onClick={submitData}>Add Todo</button></div>
                 </form>
             </div>
         </div>
