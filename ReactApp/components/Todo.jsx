@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 const Todo = ({ props }) => {
+    console.log(typeof props.item.deadlineDate)
+    console.log(typeof props.item.deadlineTime)
     const [Bg, setBg] = useState({color:"#F9FAFB",border:"#c5c5c5"});
     const navigate = useNavigate();
     const onClickHandler = (route) => {
@@ -36,8 +38,8 @@ const Todo = ({ props }) => {
                 }}>
                 <div className="flex justify-between">
                     <div className='deadline'>
-                        <p className={`text-2xl font-bold ${props.bin ? "" : "hover:underline"} hover:cursor-pointer w-fit`} onClick={() => { onClickHandler(`/UpdTodo/${props.item.id}`) }}>{props.item.deadline}</p>
-                        <p className={`text-2xl font-bold text-red-600 ${Bg?.color==="#bbf7d0"?"hidden":"block"}`}>Time Elapsed</p>
+                        <p className={`text-2xl font-bold ${props.bin ? "" : "hover:underline"} hover:cursor-pointer w-fit text-red-600`} onClick={() => { onClickHandler(`/UpdTodo/${props.item.id}`) }}>{props.item.deadlineDay}, {props.item.deadlineDate}</p>
+                        <p className={`text-2xl font-bold ${Bg?.color==="#bbf7d0"?"hidden":"block"}`}>{props.item.deadlineTime} {props.item.deadlineTime.slice(0,2)>12?"PM":"AM"}</p>
                     </div>
                     <div className="completeBtn flex">
                         <input type="checkbox" name={`checkinput-${props.item.id}`} className={`w-10 h-5 mt-2 ${(!(props.item.completed)) ? "block" : "hidden"} cursor-pointer`} onClick={() => { props.MarkAsComplete(props.item.id) }} />
@@ -47,8 +49,7 @@ const Todo = ({ props }) => {
 
                     </div>
                 </div>
-                <hr className={`my-2 border-[#E5E7EB] ${Bg?.color==="#bbf7d0"?"hidden":"block"}`} />
-                <div className={`flex w-full justify-between items-center ${Bg?.color==="#bbf7d0"?"my-6":""}`}>
+                <div className={`flex w-full justify-between items-center ${Bg?.color==="#bbf7d0"?"mt-8":""}`}>
                     <div>
                         <p className={`text-lg font-medium ${props.bin ? "" : "hover:underline"} hover:cursor-pointer`} onClick={() => { onClickHandler(`/UpdTodo/${props.item.id}`) }}>{props.item.title}</p>
                         <p className='text-sm'>{props.item.desc}</p>
