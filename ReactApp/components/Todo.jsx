@@ -2,8 +2,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"
 const Todo = ({ props }) => {
-    console.log(typeof props.item.deadlineDate)
-    console.log(typeof props.item.deadlineTime)
     const [Bg, setBg] = useState({color:"#F9FAFB",border:"#c5c5c5"});
     const navigate = useNavigate();
     const onClickHandler = (route) => {

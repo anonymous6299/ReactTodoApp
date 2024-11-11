@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import SideNav from './SideNav'
 import Todo from './Todo'
 import { useNavigate } from 'react-router-dom'
-
+import Toast from './Toast'
 const Todos = () => {
     const nav = useNavigate();
     const [Todos, setTodos] = useState([]);
@@ -17,7 +17,9 @@ const Todos = () => {
     const [BorderB, setBorderB] = useState(false);
     const [BorderC, setBorderC] = useState(false);
     const [BorderD, setBorderD] = useState(false);
-
+    const [Display, setDisplay] = useState(false);
+    const [Heading, setHeading] = useState("");
+    const [Desc, setDesc] = useState("")
     useEffect(() => {
         if (JSON.parse(localStorage.getItem("todo"))) {
             setTodos(JSON.parse(localStorage.getItem("todo")));
@@ -79,6 +81,9 @@ const Todos = () => {
         localStorage.setItem("todo", JSON.stringify(newTodos));
         arr.push(newTodo);
         localStorage.setItem("bin", JSON.stringify(arr));
+        setHeading("Todo Deleted");
+        setDesc("Todo moved to Bin.");
+        setDisplay(true);
     }
     const MarkAsComplete = (id) => {
         const arr = Todos;
@@ -109,6 +114,12 @@ const Todos = () => {
             setLPriorityTodos(arr);
         }
         localStorage.setItem("todo",JSON.stringify(arr));
+        setHeading("Completed");
+        setDesc("Todo marked as completed.");
+        setDisplay(true);
+    }
+    const CloseToast = () => {
+        setDisplay(false);
     }
     return (
         <div className='flex'>
@@ -202,6 +213,15 @@ const Todos = () => {
                     </div>
 
                 </div>
+                <Toast props={{
+                    icon:"M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z",
+                    heading:Heading,
+                    desc:Desc,
+                    bg:"#D1FAE5",
+                    border:"#10B981",
+                    text:"#052e16",
+                    display:Display,
+                    close:CloseToast}}/>
             </div>
         </div>
     )

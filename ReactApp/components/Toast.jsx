@@ -2,7 +2,7 @@
 const Toast = ({props}) => {
     return (
         <>
-            <div className={`h-fit py-3 w-fit mx-40 rounded-md absolute -right-32 bottom-6 ${props.display?"block":"hidden"}`}
+            <div className={`h-fit py-3 w-fit mx-40 rounded-md absolute -right-32 bottom-6 z-10 ${props.display?"block":"hidden"}`}
             style={{
                 background:props.bg,
                 border:`1px solid ${props.border}`,
