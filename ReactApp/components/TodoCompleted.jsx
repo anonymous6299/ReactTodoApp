@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import context from '../ContextAPI/ContextIniit';
 
 const TodoCompleted = (props) => {
     const [CTodos, setCTodos] = useState([]);
     const [Todos, setTodos] = useState([]);
+    const Context = useContext(context);
+    const {CardBg,CardClr} = Context;
     useEffect(() => {
         if (props.todos?.length !== 0) {
             setTodos(props.todos)
@@ -15,7 +18,7 @@ const TodoCompleted = (props) => {
     }, [props.todos])
 
     return (
-        <div className='todosCompleted bg-[#F9FAFB] border border-[#c1c4c9] text-[#212731] rounded-md h-fit w-[26rem] py-10 px-5 flex flex-col hover:shadow-lg'>
+        <div className='TodoStatCard border border-[#c1c4c9] rounded-md h-fit w-[26rem] py-10 px-5 flex flex-col hover:shadow-lg' style={{backgroundColor:CardBg,color:CardClr}} id='todos1'>
             <div className='flex justify-between'>
                 <div className='todosCompleted w-fit flex flex-col justify-center'>
                     <p className='text-6xl w-fit font-medium mx-auto'>{CTodos.length}/{props.todos.length}</p>

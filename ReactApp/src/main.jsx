@@ -10,28 +10,29 @@ import AddTodo from '../components/AddTodo.jsx';
 import Todos from '../components/Todos.jsx';
 import UpdTodo from '../components/UpdTodo.jsx';
 import Bin from '../components/Bin.jsx';
+import ContextState from '../ContextAPI/ContextState.jsx';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
+    element: <ContextState><App /></ContextState>,
   },
   {
     path: "/addTodo",
-    element: <AddTodo/>,
+    element: <ContextState><AddTodo /> </ContextState>,
   },
   {
     path: "/AllTodos",
-    element: <Todos/>,
+    element: <ContextState><Todos /> </ContextState>,
   },
   {
     path: "/UpdTodo/:id",
-    element: <UpdTodo/>,
+    element: <ContextState><UpdTodo /> </ContextState>,
   },
   {
     path: "/bin",
-    element: <Bin/>,
+    element: <ContextState><Bin /> </ContextState>,
   },
 ]);
 

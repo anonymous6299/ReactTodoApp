@@ -1,9 +1,12 @@
-import  { useEffect, useState } from 'react'
+import  { useContext, useEffect, useState } from 'react'
 import SideNav from './SideNav'
 import Todo from './Todo'
 import { useNavigate } from 'react-router-dom'
 import Toast from './Toast'
+import context from '../ContextAPI/ContextIniit'
 const Todos = () => {
+    const Context = useContext(context);
+    const { TodoNavBdr } = Context;
     const nav = useNavigate();
     const [Todos, setTodos] = useState([]);
     const [Left, setLeft] = useState("left-[0%]")
@@ -129,27 +132,27 @@ const Todos = () => {
                 <div className='nav my-10'>
                     <div className="priorityNav flex w-full justify-between px-40">
                         <div>
-                            <button className={`w-56 flex justify-between items-center px-8 rounded-md ${BorderA ? "border-2" : ""} border-black py-2`} onClick={() => { setSelDis(false); setLeft("left-[0%]"); setBorderA(true); setBorderB(false); setBorderC(false); setBorderD(false) }}>
+                            <button className={`w-56 flex justify-between items-center px-8 rounded-md ${BorderA ? "border-2" : ""} py-2`} onClick={() => { setSelDis(false); setLeft("left-[0%]"); setBorderA(true); setBorderB(false); setBorderC(false); setBorderD(false) }} style={{borderColor:TodoNavBdr}}>
                                 <p className='font-medium'>ALL TODOS</p>
-                                <p className='border border-black w-6 rounded-full'>{Todos.length}</p>
+                                <p className='border w-6 rounded-full' style={{borderColor:TodoNavBdr}}>{Todos.length}</p>
                             </button>
                         </div>
                         <div>
-                            <button className={`w-56 flex justify-between items-center px-8 rounded-md ${BorderB ? "border-2" : ""} border-black py-2`} onClick={() => { setSelDis(true); setLeft("left-[-100%]"); setBorderA(false); setBorderB(true); setBorderC(false); setBorderD(false) }}>
+                            <button className={`w-56 flex justify-between items-center px-8 rounded-md ${BorderB ? "border-2" : ""} py-2`} onClick={() => { setSelDis(true); setLeft("left-[-100%]"); setBorderA(false); setBorderB(true); setBorderC(false); setBorderD(false) }} style={{borderColor:TodoNavBdr}}>
                                 <p className='font-medium'>PENDING</p>
-                                <p className='border border-black w-6 rounded-full'>{HPriorityTodos.length + LPriorityTodos.length + MPriorityTodos.length}</p>
+                                <p className='border w-6 rounded-full' style={{borderColor:TodoNavBdr}}>{HPriorityTodos.length + LPriorityTodos.length + MPriorityTodos.length}</p>
                             </button>
                         </div>
                         <div>
-                            <button className={`w-56 flex justify-between items-center px-8 rounded-md ${BorderC ? "border-2" : ""} border-black py-2`} onClick={() => { setSelDis(false); setLeft("left-[-200%]"); setBorderA(false); setBorderB(false); setBorderC(true); setBorderD(false) }}>
+                            <button className={`w-56 flex justify-between items-center px-8 rounded-md ${BorderC ? "border-2" : ""} py-2`} onClick={() => { setSelDis(false); setLeft("left-[-200%]"); setBorderA(false); setBorderB(false); setBorderC(true); setBorderD(false) }} style={{borderColor:TodoNavBdr}}>
                                 <p className='font-medium'>COMPLETED</p>
-                                <p className='border border-black w-6 rounded-full'>{CompletedTodos.length}</p>
+                                <p className='border w-6 rounded-full' style={{borderColor:TodoNavBdr}}>{CompletedTodos.length}</p>
                             </button>
                         </div>
                         <div>
-                            <button className={`w-56 flex justify-between items-center px-8 rounded-md ${BorderD ? "border-2" : ""} border-black py-2`} onClick={() => { setSelDis(false); setLeft("left-[-300%]"); setBorderA(false); setBorderB(false); setBorderC(false); setBorderD(true) }}>
+                            <button className={`w-56 flex justify-between items-center px-8 rounded-md ${BorderD ? "border-2" : ""} py-2`} onClick={() => { setSelDis(false); setLeft("left-[-300%]"); setBorderA(false); setBorderB(false); setBorderC(false); setBorderD(true) }} style={{borderColor:TodoNavBdr}}>
                                 <p className='font-medium'>IN BIN</p>
-                                <p className='border border-black w-6 rounded-full'>{JSON.parse(localStorage.getItem("bin")).length}</p>
+                                <p className='border w-6 rounded-full' style={{borderColor:TodoNavBdr}}>{JSON.parse(localStorage.getItem("bin")).length}</p>
                             </button>
                         </div>
                     </div>
@@ -165,29 +168,29 @@ const Todos = () => {
                     </div>
                 </div>
                 <div className={` w-full h-[62%] z-10 relative ${Left} transition-all`}>
-                    <div className=' absolute w-full pl-16 flex flex-wrap left-[0%] h-96 overflow-y-scroll'>
+                    <div className={`absolute w-full px-28 flex flex-wrap left-[0%] h-96 ${Todos.length!==0?"overflow-y-scroll":""}`}>
                         {
                             Todos.length !== 0 ? Todos.map((item, index) => {
                                 return <div className='mx-3 my-3' key={index}><Todo props={{ item, DelTodo, bin: false, MarkAsComplete }} /></div>
                             }) : <p>No Todos Found.</p>
                         }
                     </div>
-                    <div className=' absolute w-full px-28 left-[100%]'>
-                        <div className={`${Priority === "h" ? "block" : "hidden"} flex flex-wrap`}>
+                    <div className=' absolute w-full px-28 left-[100%] h-96'>
+                        <div className={`${Priority === "h" ? "block" : "hidden"} flex flex-wrap h-full ${HPriorityTodos.length!==0?"overflow-y-scroll":""}`}>
                             {
                                 HPriorityTodos.length !== 0 ? HPriorityTodos.map((item, index) => {
                                     return <div className='mx-3 my-3' key={index} > <Todo props={{ item, DelTodo, bin: false, MarkAsComplete,bg:{color:"#FEE2E2",border:"#EF4444"} }} /></div>
                                 }) : <p>No Todos Found.</p>
                             }
                         </div>
-                        <div className={`${Priority === "m" ? "block" : "hidden"} flex flex-wrap`}>
+                        <div className={`${Priority === "m" ? "block" : "hidden"} flex flex-wrap h-full ${MPriorityTodos.length!==0?"overflow-y-scroll":""}`}>
                             {
                                 MPriorityTodos.length !== 0 ? MPriorityTodos.map((item, index) => {
                                     return <div className='mx-3 my-3' key={index} > <Todo props={{ item, DelTodo, bin: false, MarkAsComplete,bg:{color:"#FEF3C7",border:"#F59E0B"} }}/></div>
                                 }) : <p>No Todos Found.</p>
                             }
                         </div>
-                        <div className={`${Priority === "l" ? "block" : "hidden"} flex flex-wrap`}>
+                        <div className={`${Priority === "l" ? "block" : "hidden"} flex flex-wrap h-full ${LPriorityTodos.length!==0?"overflow-y-scroll":""}`}>
                             {
                                 LPriorityTodos.length !== 0 ? LPriorityTodos.map((item, index) => {
                                     return <div className='mx-3 my-3' key={index} > <Todo props={{ item, DelTodo, bin: false, MarkAsComplete,bg:{color:"#D1FAE5",border:"#10B981"} }} /></div>
@@ -195,14 +198,14 @@ const Todos = () => {
                             }
                         </div>
                     </div>
-                    <div className=' absolute w-full px-28 flex flex-wrap left-[200%]'>
+                    <div className={`absolute w-full px-28 flex flex-wrap left-[200%] h-96 ${CompletedTodos.length!==0?"overflow-y-scroll":""}`}>
                         {
                             CompletedTodos.length !== 0 ? CompletedTodos.map((item, index) => {
                                 return <div key={index} className='mx-3 my-3'><Todo props={{ item, DelTodo, bin: false,bg:{color:"#bbf7d0",border:"#14532d"} }} /></div>
                             }) : <p>No Todos Found.</p>
                         }
                     </div>
-                    <div className=' absolute w-full px-28 flex space-x-12 flex-wrap left-[300%]'>
+                    <div className=' absolute w-full left-[300%]'>
                         <div className="btn flex justify-center w-full my-20"><button className='bg-[#2563EB] px-4 py-2 rounded-md text-white hover:bg-[#1D4ED8] flex items-center' onClick={() => { nav("/bin") }}>
                             <p>Go To Bin</p>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 ml-2">

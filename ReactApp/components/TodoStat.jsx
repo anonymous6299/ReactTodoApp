@@ -1,6 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import context from '../ContextAPI/ContextIniit';
 
 const TodoStat = (props) => {
+    const Context=useContext(context)
+    const {CardBg,CardClr} = Context;
     const [HPriTodos, setHPriTodos] = useState([]);
     const [MPriTodos, setMPriTodos] = useState([]);
     const [LPriTodos, setLPriTodos] = useState([]);
@@ -26,7 +29,7 @@ const TodoStat = (props) => {
     }, [props.todos])
 
     return (
-        <div className='todos bg-[#F9FAFB] border border-[#c1c4c9] text-[#212731] rounded-lg h-fit w-[26rem] py-10 px-8 flex justify-between hover:shadow-lg'>
+        <div className='TodoStatCard border border-[#c1c4c9] rounded-lg h-fit w-[26rem] py-10 px-8 flex justify-between hover:shadow-lg' id='todos2' style={{backgroundColor:CardBg,color:CardClr}}>
             <div className='todosAdded w-fit flex flex-col justify-center'>
                 <p className='text-6xl w-fit font-medium mx-auto'>{props.todos.length}</p>
                 <p className='font-medium w-fit'>Todos Added</p>
