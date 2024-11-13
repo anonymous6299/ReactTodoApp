@@ -3,7 +3,7 @@ import SideNav from './SideNav'
 import Todo from './Todo'
 import { useNavigate } from 'react-router-dom'
 import Toast from './Toast'
-import context from '../ContextAPI/ContextIniit'
+import context from '../ContextAPI/ContextInit'
 const Todos = () => {
     const Context = useContext(context);
     const { TodoNavBdr } = Context;

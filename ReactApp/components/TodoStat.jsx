@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import context from '../ContextAPI/ContextIniit';
+import context from '../ContextAPI/ContextInit';
 
 const TodoStat = (props) => {
     const Context=useContext(context)
@@ -29,9 +29,9 @@ const TodoStat = (props) => {
     }, [props.todos])
 
     return (
-        <div className='TodoStatCard border border-[#c1c4c9] rounded-lg h-fit w-[26rem] py-10 px-8 flex justify-between hover:shadow-lg' id='todos2' style={{backgroundColor:CardBg,color:CardClr}}>
+        <div className={`TodoStatCard border border-[#c1c4c9] rounded-lg h-fit w-[26rem] py-10 px-8 flex justify-between hover:shadow-lg ${localStorage.getItem("TodoAppMode")==="light"?"hover:shadow-gray-200":"hover:shadow-gray-700"} max-[885px]:w-full max-[455px]:w-[20rem]`} id='todos2' style={{backgroundColor:CardBg,color:CardClr}}>
             <div className='todosAdded w-fit flex flex-col justify-center'>
-                <p className='text-6xl w-fit font-medium mx-auto'>{props.todos.length}</p>
+                <p className='text-6xl font-medium text-center'>{props.todos.length}</p>
                 <p className='font-medium w-fit'>Todos Added</p>
             </div>
             <div className='priorityTodo w-fit flex flex-col space-y-3 justify-center'>

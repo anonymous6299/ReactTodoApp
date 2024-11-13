@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import SideNav from './SideNav'
 import Toast from './Toast';
-import context from '../ContextAPI/ContextIniit';
+import context from '../ContextAPI/ContextInit';
 
 const AddTodo = () => {
     const [Input, setInput] = useState({ id: "", title: "", deadlineDate: "",deadlineTime:"23:59",deadlineDay:"", desc: "", priority: "",completed:false});

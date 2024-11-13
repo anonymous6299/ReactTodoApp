@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import context from "./ContextIniit";
+import context from "./ContextInit";
 
 const ContextState = (props) => {
     const [Mode, setMode] = useState("light");
@@ -8,7 +8,10 @@ const ContextState = (props) => {
     const [CardBg, setCardBg] = useState("#F9FAFB");
     const [CardClr, setCardClr] = useState("#212731");
     const [TodoNavBdr, setTodoNavBdr] = useState("black");
-    const [FormUI, setFormUI] = useState({bg:"#F9FAFB",text:"#1F2937",border:"#D1D5DB",FocBdr:"#B8BDC6"})
+    const [FormUI, setFormUI] = useState({bg:"#F9FAFB",text:"#1F2937",border:"#D1D5DB",FocBdr:"#B8BDC6"});
+    const [SideNavUI, setSideNavUI] = useState({bg:"#374151",text:"white",btnbdr:"white"});
+    const [HomeBtmFrmBdr, setHomeBtmFrmBdr] = useState("#212731");
+    const [SideNavLft, setSideNavLft] = useState(40)
     const ToggleToDark = () => {
         document.body.style.backgroundColor = "#121212"
         document.body.style.color="#F3F4F6";
@@ -21,6 +24,10 @@ const ContextState = (props) => {
             border:"#4A4A4A",
             FocBdr:"#B8BDC6"
         })
+        setSideNavUI({
+            bg:"#121212",text:"white",btnbdr:"white"
+        })
+        setHomeBtmFrmBdr("#F3F4F6")
     }
     const ToggleToLight = () => {
         document.body.style.backgroundColor = "#F3F4F6";
@@ -34,6 +41,8 @@ const ContextState = (props) => {
             border:"#D1D5DB",
             FocBdr:"#B8BDC6"
         })
+        setSideNavUI({bg:"#374151",text:"white",btnbdr:"white"});
+        setHomeBtmFrmBdr("#212731")
     }
     const ToogleMode = () => {
         if (Mode === "light") {
@@ -80,7 +89,9 @@ const ContextState = (props) => {
                 CardBg,
                 CardClr,
                 TodoNavBdr,
-                FormUI
+                FormUI,
+                SideNavUI,
+                HomeBtmFrmBdr,
             }
         }>
             {props.children}
