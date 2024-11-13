@@ -11,7 +11,7 @@ const ContextState = (props) => {
     const [FormUI, setFormUI] = useState({bg:"#F9FAFB",text:"#1F2937",border:"#D1D5DB",FocBdr:"#B8BDC6"});
     const [SideNavUI, setSideNavUI] = useState({bg:"#374151",text:"white",btnbdr:"white"});
     const [HomeBtmFrmBdr, setHomeBtmFrmBdr] = useState("#212731");
-    const [SideNavLft, setSideNavLft] = useState(40)
+    const [SideNavLft, setSideNavLft] = useState(0)
     const ToggleToDark = () => {
         document.body.style.backgroundColor = "#121212"
         document.body.style.color="#F3F4F6";
@@ -80,6 +80,15 @@ const ContextState = (props) => {
             }
         }
     }, [])
+    window.addEventListener('resize',()=>{
+        if (window.outerWidth<=1025){
+            setSideNavLft("-10rem")
+        }
+        else{
+            setSideNavLft("0rem")
+        }
+    })
+    
     return (
         <context.Provider value={
             {
@@ -92,6 +101,8 @@ const ContextState = (props) => {
                 FormUI,
                 SideNavUI,
                 HomeBtmFrmBdr,
+                SideNavLft,
+                setSideNavLft
             }
         }>
             {props.children}

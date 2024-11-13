@@ -6,7 +6,7 @@ import context from '../ContextAPI/ContextInit'
 
 const Home = () => {
     const Context = useContext(context);
-    const { ToogleMode, DisplayLight, DisplayDark } = Context;
+    const { ToogleMode, DisplayLight, DisplayDark,SideNavLft,setSideNavLft } = Context;
     const [Todos, setTodos] = useState([]);
     useEffect(() => {
         if (JSON.parse(localStorage.getItem("todo"))) {
@@ -14,13 +14,12 @@ const Home = () => {
         }
     }, [])
     const toogleLeft = () => {
-        console.log(document.getElementById("SideNav").style)
-        if (document.getElementById("SideNav").style.left==="-10rem") {
+        if (SideNavLft==="-10rem") {
 
-            document.getElementById("SideNav").style.left="0rem"
+            setSideNavLft("0rem")
         }
         else{
-            document.getElementById("SideNav").style.left="-10rem"
+            setSideNavLft("-10rem")
         }
     }
     return (
@@ -44,11 +43,11 @@ const Home = () => {
 
             </div>
 
-            <div className='dashboard mt-16 px-10 flex justify-center w-[86vw] space-x-20 max-[1086px]:space-x-6 max-[1025px]:w-full max-[885px]:flex-col max-[885px]:items-center max-[885px]:space-x-0 max-[885px]:space-y-6'>
+            <div className='dashboard mt-16 px-10 flex justify-center w-[86vw] space-x-20 max-[1086px]:space-x-6 max-[1025px]:w-full max-[885px]:flex-col max-[885px]:items-center max-[885px]:space-x-0 max-[885px]:space-y-6 overflow-y-scroll'>
                 <TodoStat todos={Todos} />
                 <TodoCompleted todos={Todos} />
             </div>
-            <hr className='mt-20 mb-10 mx-10 border-[#212731] opacity-20' />
+            <hr className='mt-20 mb-10 mx-10 border-[#212731] opacity-20 max-[885px]:mt-10 max-[885px]:mb-5' />
             <HomeBottomSec todos={Todos} />
         </>
     )
