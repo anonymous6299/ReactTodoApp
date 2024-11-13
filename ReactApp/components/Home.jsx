@@ -26,7 +26,7 @@ const Home = () => {
         <>
             <div className='flex items-center w-full justify-between pt-8 px-10'>
                 <div className="flex items-center space-x-5">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-10 border border-black px-2 py-1 rounded-md hidden max-[1025px]:block cursor-pointer`} onClick={toogleLeft}>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-10 border px-2 py-1 rounded-md hidden max-[1025px]:block cursor-pointer ${localStorage.getItem("TodoAppMode")==="dark"?"border-white":"border-black"}`} onClick={toogleLeft}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
 
@@ -43,7 +43,7 @@ const Home = () => {
 
             </div>
 
-            <div className='dashboard mt-16 px-10 flex justify-center w-[86vw] space-x-20 max-[1086px]:space-x-6 max-[1025px]:w-full max-[885px]:flex-col max-[885px]:items-center max-[885px]:space-x-0 max-[885px]:space-y-6 overflow-y-scroll'>
+            <div className='dashboard mt-16 px-10 flex justify-center w-[86vw] space-x-20 max-[1086px]:space-x-6 max-[1025px]:w-full max-[885px]:flex-col max-[885px]:items-center max-[885px]:space-x-0 max-[885px]:space-y-6'>
                 <TodoStat todos={Todos} />
                 <TodoCompleted todos={Todos} />
             </div>

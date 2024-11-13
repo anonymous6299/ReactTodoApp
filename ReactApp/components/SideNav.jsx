@@ -8,7 +8,7 @@ const SideNav = () => {
     const { SideNavUI, SideNavLft , setSideNavLft} = Context;
     return (
         <>
-            <div className={`flex flex-col w-fit h-[100vh] px-8 py-10 justify-between z-20 relative max-[1368px]:px-4 ${localStorage.getItem("TodoAppMode") === "dark" ? "border border-l-0 border-t-0 border-b-0" : "border-0"} max-[1025px]:absolute transition-all max-[1025px]:h-[120vh]`} style={{ backgroundColor: SideNavUI.bg, color: SideNavUI.text, left: SideNavLft }} id="SideNav">
+            <div className={`flex flex-col w-fit h-[100vh] px-8 py-10 justify-between z-20 relative max-[1368px]:px-4 ${localStorage.getItem("TodoAppMode") === "dark" ? "border border-l-0 border-t-0 border-b-0" : "border-0"} max-[1025px]:absolute transition-all `} style={{ backgroundColor: SideNavUI.bg, color: SideNavUI.text, left: SideNavLft }} id="SideNav">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1} stroke="currentColor" className="size-10 mx-auto hidden max-[1025px]:block" onClick={()=>{setSideNavLft("-10rem")}}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>

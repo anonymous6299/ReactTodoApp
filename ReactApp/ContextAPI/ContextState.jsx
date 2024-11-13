@@ -81,7 +81,7 @@ const ContextState = (props) => {
         }
     }, [])
     window.addEventListener('resize',()=>{
-        if (window.outerWidth<=1025){
+        if (window.outerWidth<1025){
             setSideNavLft("-10rem")
         }
         else{

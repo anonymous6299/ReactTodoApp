@@ -19,7 +19,7 @@ const TodoCompleted = (props) => {
 
     return (
         <div className={`TodoStatCard border border-[#c1c4c9] rounded-md h-fit w-[26rem] py-10 px-5 flex flex-col hover:shadow-lg ${localStorage.getItem("TodoAppMode")==="light"?"hover:shadow-gray-200":"hover:shadow-gray-700"} max-[885px]:w-full max-[455px]:w-[20rem]`} style={{backgroundColor:CardBg,color:CardClr}} id='todos1'>
-            <div className='flex justify-between'>
+            <div className='flex justify-between max-[455px]:flex-col max-[455px]:items-center max-[455px]:space-y-3'>
                 <div className='todosCompleted w-fit flex flex-col justify-center'>
                     <p className='text-6xl w-fit font-medium mx-auto'>{CTodos.length}/{props.todos.length}</p>
                     <p className='font-medium w-fit'>Todos Completed</p>
