@@ -44,7 +44,7 @@ const HomeBottomSec = (props) => {
                 </div>
 
             </div>
-            <div className={`w-full flex ${SearchResult?"justify-center":"justify-between"} mx-4 my-16`}>
+            <div className={`w-full flex ${SearchResult?"justify-center":"justify-between space-x-6 max-[1148px]:space-x-3 ml-6 max-[1148px]:ml-3 max-[1025px]:ml-6 max-[940px]:flex-col max-[940px]:items-center max-[940px]:h-40 max-[940px]:space-y-3 overflow-y-scroll max-[940px]:space-x-0"} my-16 max-[940px]:my-4`}>
                 {
                     SearchResult?<Todo props={{ item:SearchResult, bin: false }} />:
                     Arr.map((item,index)=>{

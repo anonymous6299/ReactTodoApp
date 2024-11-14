@@ -134,17 +134,15 @@ const Todos = () => {
         setDisplay(false);
     }
     return (
-        <div className='flex overflow-y-hidden overflow-x-hidden'>
+        <div className='flex overflow-y-hidden overflow-x-hidden max-[1025px]:h-[100vh]'>
             <div><SideNav /></div>
             <div className='w-full'>
-                <div className="flex justify-around items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-10 border px-2 py-1 rounded-md hidden max-[1025px]:block cursor-pointer ${localStorage.getItem("TodoAppMode") === "dark" ? "border-white" : "border-black"}`} onClick={toogleLeft}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-10 border px-2 py-1 rounded-md absolute left-8 top-5 hidden max-[1025px]:block cursor-pointer ${localStorage.getItem("TodoAppMode") === "dark" ? "border-white" : "border-black"}`} onClick={toogleLeft}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                 </svg>
-                <p className='text-center text-3xl my-20 mr-44'>Your Todos</p>
-                </div>
-                <div className='nav my-10'>
-                    <div className="priorityNav flex w-full justify-between px-40 max-[1350px]:px-20 max-[1178px]:px-10">
+                <p className='text-center text-3xl my-20 max-[865px]:my-10'>Your Todos</p>
+                <div className='nav my-10 max-[865px]:mt-0'>
+                    <div className="priorityNav flex w-full justify-between px-40 max-[1350px]:px-20 max-[1178px]:px-10 max-[1025px]:px-5 max-[865px]:flex-col max-[865px]:items-center max-[865px]:space-y-4">
                         <div>
                             <button className={`w-56 max-[1088px]:w-52 max-[1053px]:w-48 flex justify-between items-center px-8 rounded-md ${BorderA ? "border-2" : ""} py-2`} onClick={() => { setSelDis(false); setLeft("left-[0%]"); setBorderA(true); setBorderB(false); setBorderC(false); setBorderD(false) }} style={{ borderColor: TodoNavBdr }}>
                                 <p className='font-medium'>ALL TODOS</p>
@@ -182,29 +180,29 @@ const Todos = () => {
                     </div>
                 </div>
                 <div className={` w-full h-[62%] z-10 relative ${Left} transition-all`}>
-                    <div className={`absolute w-full px-28 flex flex-wrap left-[0%] h-96 ${Todos.length !== 0 ? "overflow-y-scroll" : ""}`}>
+                    <div className={`absolute w-full px-28 max-[1053px]:px-10 justify-between max-[912px]:justify-center flex flex-wrap left-[0%] h-96 max-[768px]:h-52 max-[768px]:px-2 ${Todos.length !== 0 ? "overflow-y-scroll" : ""}`}>
                         {
                             Todos.length !== 0 ? Todos.map((item, index) => {
                                 return <div className='mx-3 my-3' key={index}><Todo props={{ item, DelTodo, bin: false, MarkAsComplete }} /></div>
                             }) : <p>No Todos Found.</p>
                         }
                     </div>
-                    <div className=' absolute w-full px-28 left-[100%] h-96'>
-                        <div className={`${Priority === "h" ? "block" : "hidden"} flex flex-wrap h-full ${HPriorityTodos.length !== 0 ? "overflow-y-scroll" : ""}`}>
+                    <div className=' absolute w-full left-[100%] h-96 max-[768px]:h-52'>
+                        <div className={`${Priority === "h" ? "block" : "hidden"} absolute w-full justify-between max-[912px]:justify-center flex flex-wrap h-full px-28 max-[1053px]:px-10 max-[768px]:px-2 ${HPriorityTodos.length !== 0 ? "overflow-y-scroll" : ""}`}>
                             {
                                 HPriorityTodos.length !== 0 ? HPriorityTodos.map((item, index) => {
                                     return <div className='mx-3 my-3' key={index} > <Todo props={{ item, DelTodo, bin: false, MarkAsComplete, bg: { color: "#FEE2E2", border: "#EF4444" } }} /></div>
                                 }) : <p>No Todos Found.</p>
                             }
                         </div>
-                        <div className={`${Priority === "m" ? "block" : "hidden"} flex flex-wrap h-full ${MPriorityTodos.length !== 0 ? "overflow-y-scroll" : ""}`}>
+                        <div className={`${Priority === "m" ? "block" : "hidden"} absolute w-full justify-between max-[912px]:justify-center flex flex-wrap h-full px-28 max-[1053px]:px-10 max-[768px]:px-2 ${MPriorityTodos.length !== 0 ? "overflow-y-scroll" : ""}`}>
                             {
                                 MPriorityTodos.length !== 0 ? MPriorityTodos.map((item, index) => {
                                     return <div className='mx-3 my-3' key={index} > <Todo props={{ item, DelTodo, bin: false, MarkAsComplete, bg: { color: "#FEF3C7", border: "#F59E0B" } }} /></div>
                                 }) : <p>No Todos Found.</p>
                             }
                         </div>
-                        <div className={`${Priority === "l" ? "block" : "hidden"} flex flex-wrap h-full ${LPriorityTodos.length !== 0 ? "overflow-y-scroll" : ""}`}>
+                        <div className={`${Priority === "l" ? "block" : "hidden"} absolute w-full justify-between max-[912px]:justify-center flex flex-wrap h-full px-28 max-[1053px]:px-10 max-[768px]:px-2 ${LPriorityTodos.length !== 0 ? "overflow-y-scroll" : ""}`}>
                             {
                                 LPriorityTodos.length !== 0 ? LPriorityTodos.map((item, index) => {
                                     return <div className='mx-3 my-3' key={index} > <Todo props={{ item, DelTodo, bin: false, MarkAsComplete, bg: { color: "#D1FAE5", border: "#10B981" } }} /></div>
@@ -212,7 +210,7 @@ const Todos = () => {
                             }
                         </div>
                     </div>
-                    <div className={`absolute w-full px-28 flex flex-wrap left-[200%] h-96 ${CompletedTodos.length !== 0 ? "overflow-y-scroll" : ""}`}>
+                    <div className={`absolute w-full px-28 max-[1053px]:px-10 justify-between max-[912px]:justify-center flex flex-wrap left-[200%] h-96 max-[768px]:h-52 max-[768px]:px-2 ${CompletedTodos.length !== 0 ? "overflow-y-scroll" : ""}`}>
                         {
                             CompletedTodos.length !== 0 ? CompletedTodos.map((item, index) => {
                                 return <div key={index} className='mx-3 my-3'><Todo props={{ item, DelTodo, bin: false, bg: { color: "#bbf7d0", border: "#14532d" } }} /></div>

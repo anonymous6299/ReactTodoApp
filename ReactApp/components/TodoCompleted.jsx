@@ -32,7 +32,7 @@ const TodoCompleted = (props) => {
                         76-100%: Green (#10B981) to represent near or full completion */}
                         <div className={`bg-[#EF4444] rounded-full text-white text-center`} style={{
                             width: `${((Todos.length !== 0 && CTodos.length !== 0) ? (CTodos.length / props.todos.length) * 100 : 15)}%`
-                        }} >{(!(props.todos.length === 0)) ? (CTodos.length / props.todos.length) * 100 : "0"}%</div>
+                        }} >{(!(props.todos.length === 0)) ? Math.round((CTodos.length / props.todos.length) * 100) : "0"}%</div>
                     </div>
                 </div>
             </div>
