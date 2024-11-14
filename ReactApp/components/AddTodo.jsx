@@ -53,12 +53,10 @@ const AddTodo = () => {
         <div className='flex'>
             <SideNav />
             <div className="form w-full h-[100vh] overflow-y-scroll">
-                <div className="flex items-center justify-around">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-10 border px-2 py-1 rounded-md hidden max-[1025px]:block cursor-pointer ${localStorage.getItem("TodoAppMode") === "dark" ? "border-white" : "border-black"}`} onClick={toogleLeft}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                    </svg>
-                    <p className='text-center text-3xl my-20 mr-44 max-[585px]:mr-24'>Add a Todo</p>
-                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-10 border px-2 py-1 rounded-md absolute left-8 top-5 hidden max-[1025px]:block cursor-pointer ${localStorage.getItem("TodoAppMode") === "dark" ? "border-white" : "border-black"}`} onClick={toogleLeft}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+                <p className='text-center text-3xl my-20'>Add a Todo</p>
                 <form className='space-y-4 w-fit mx-auto '>
                     <div className='flex w-fit mx-auto space-x-2 max-[595px]:flex-col max-[595px]:space-x-0 max-[595px]:space-y-3 max-[595px]:w-full'>
                         <div className='input flex flex-col'>

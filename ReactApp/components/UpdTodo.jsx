@@ -1,14 +1,17 @@
 import Toast from './Toast';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import SideNav from '../components/SideNav'
 import { useParams } from 'react-router-dom';
+import context from '../ContextAPI/ContextInit';
 
 const UpdTodo = () => {
   const { id } = useParams();
+  const Context = useContext(context);
   const [Todo, setTodo] = useState({ id: "", title: "", deadlineDay: "", desc: "", deadlineDate: "", deadlineTime: "", priority: "", completed: false });
   const [Index, setIndex] = useState(0);
   const days = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
   const [Display, setDisplay] = useState(false);
+  const { FormUI, setSideNavLft, SideNavLft } = Context;
   const onChange = (e) => {
     setTodo({ ...Todo, [e.target.name]: e.target.value });
   }
@@ -43,34 +46,46 @@ const UpdTodo = () => {
   const CloseToast = () => {
     setDisplay(false);
   }
+  const toogleLeft = () => {
+    if (SideNavLft === "-10rem") {
+
+      setSideNavLft("0rem")
+    }
+    else {
+      setSideNavLft("-10rem")
+    }
+  }
   return (
     <div className='flex'>
       <SideNav />
-      <div className="form w-full">
+      <div className="form w-full h-[100vh] overflow-y-scroll">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-10 border px-2 py-1 rounded-md absolute left-8 top-5 hidden max-[1025px]:block cursor-pointer ${localStorage.getItem("TodoAppMode") === "dark" ? "border-white" : "border-black"}`} onClick={toogleLeft}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
         <p className='text-center text-3xl my-20'>Update Todo</p>
-        <form className='space-y-4 w-full'>
-          <div className='flex w-fit mx-auto space-x-2'>
+        <form className='space-y-4 w-fit mx-auto '>
+          <div className='flex w-fit mx-auto space-x-2 max-[595px]:flex-col max-[595px]:space-x-0 max-[595px]:space-y-3 max-[595px]:w-full'>
             <div className='input flex flex-col'>
               <label htmlFor="title">Todo Title</label>
-              <input type="text" className='bg-[#F9FAFB] border border-[#D1D5DB] text-[#1F2937] focus:outline-none w-[29rem]  h-12 rounded-lg px-2' id='title' name='title' value={Todo.title} onChange={onChange} />
+              <input type="text" className=' border focus:outline-none w-[30rem] max-[1070px]:w-[20rem] max-[775px]:w-[10rem] h-12 rounded-lg px-2 focus:border-2 max-[595px]:w-96 max-[400px]:w-72' id='title' name='title' value={Todo.title} onChange={onChange} style={{ backgroundColor: FormUI.bg, color: FormUI.text, borderColor: FormUI.border }} />
             </div>
             <div className='input flex flex-col'>
               <label htmlFor="deadline">Todo Deadline</label>
-              <div className="flex">
-                <input type="date" className='w-48 focus:outline-none border border-[#D1D5DB] border-r-0 h-12 rounded-l-lg px-4' id='deadline' name='deadlineDate' value={Todo.deadlineDate} onChange={onChange} />
-                <input type="time" className='w-40 focus:outline-none border border-[#D1D5DB] border-l-0 h-12 rounded-r-lg px-4' id='deadline' name='deadlineTime' value={Todo.deadlineTime} onChange={onChange} />
+              <div className='flex max-[400px]:flex-col max-[400px]:space-y-2'>
+                <input type="date" className='w-40 focus:outline-none border h-12 border-r-0 rounded-l-lg px-4 focus:border-2 max-[595px]:w-[50%] max-[400px]:w-full' id='deadline' name='deadlineDate' value={Todo.deadlineDate} onChange={onChange} style={{ backgroundColor: FormUI.bg, color: FormUI.text, borderColor: FormUI.border }} />
+                <input type="time" className='w-[9.5rem] focus:outline-none border h-12 rounded-r-lg border-l-0 px-4 focus:border-2 max-[595px]:w-[50%] max-[400px]:w-full' id='deadline' name='deadlineTime' value={Todo.deadlineTime} onChange={onChange} style={{ backgroundColor: FormUI.bg, color: FormUI.text, borderColor: FormUI.border }} />
               </div>
             </div>
             <div className='input flex flex-col'>
-              <label htmlFor="deadline">Priority</label>
-              <input type="text" className='w-12 focus:outline-none border border-[#D1D5DB] h-12 rounded-lg px-4' id='deadline' name='priority' value={Todo.priority} onChange={onChange} />
+              <label htmlFor="priority">Priority</label>
+              <input type="text" className=' border focus:outline-none w-16 h-12 rounded-lg px-2 focus:border-2 max-[595px]:w-96 max-[400px]:w-72' id='priority' name='priority' onChange={onChange} value={Todo.priority} autoComplete='off' style={{ backgroundColor: FormUI.bg, color: FormUI.text, borderColor: FormUI.border }} />
             </div>
           </div>
           <div className='input w-fit mx-auto flex flex-col'>
             <label htmlFor="desc">Todo Description</label>
-            <textarea className='resize-none w-[55rem] h-40 focus:outline-none border border-[#D1D5DB] rounded-lg px-2 py-4' id='desc' name='desc' value={Todo.desc} onChange={onChange}></textarea>
+            <textarea className='resize-none w-[55rem] h-40 focus:outline-none border  rounded-lg px-2 py-4 focus:border-2 max-[1070px]:w-[45rem] max-[775px]:w-[35rem] max-[595px]:w-96 max-[400px]:w-72' id='desc' name='desc' value={Todo.desc} onChange={onChange} style={{ backgroundColor: FormUI.bg, color: FormUI.text, borderColor: FormUI.border }}></textarea>
           </div>
-          <div className="btn flex justify-end px-60"><button className='bg-[#2563EB] disabled:bg-[#3B82F6] px-4 py-2 rounded-md text-white hover:bg-[#1D4ED8]' onClick={submitData}>Update</button></div>
+          <div className="btn flex justify-end"><button className='bg-[#2563EB] disabled:bg-[#3B82F6] my-10 px-4 py-2 rounded-md text-white hover:bg-[#1D4ED8]' onClick={submitData}>Update</button></div>
         </form>
       </div>
       <Toast props={{

@@ -232,9 +232,9 @@ const Todos = () => {
                     icon: "M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z",
                     heading: Heading,
                     desc: Desc,
-                    bg: "#D1FAE5",
-                    border: "#10B981",
-                    text: "#052e16",
+                    bg: localStorage.getItem("TodoAppMode")==="light"?"#D1FAE5":"#10B981",
+                    border:"#10B981",
+                    text: localStorage.getItem("TodoAppMode")==="light"?"#052e16":"#F8FAFC",
                     display: Display,
                     close: CloseToast
                 }} />
