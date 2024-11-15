@@ -2,11 +2,13 @@ import { useContext, useEffect, useState } from "react"
 import SideNav from "./SideNav"
 import Todo from "./Todo"
 import context from "../ContextAPI/ContextInit";
+import Toast from "./Toast";
 
 const Bin = () => {
+  const [Display, setDisplay] = useState(false);
   const [BinTodos, setBinTodos] = useState([]);
   const Context = useContext(context);
-  const { setSideNavLft, SideNavLft } = Context
+  const { setSideNavLft, SideNavLft } = Context;
   useEffect(() => {
     if (localStorage.getItem("bin")) {
       setBinTodos(JSON.parse(localStorage.getItem("bin")))
@@ -28,6 +30,24 @@ const Bin = () => {
     setBinTodos(newTodos);
     localStorage.setItem("bin", JSON.stringify(newTodos))
   }
+  const RestoreTodo = (id) => {
+    const bin = JSON.parse(localStorage.getItem("bin"));
+    const todo = bin.find((item) => {
+      return item.id === id;
+    })
+    const newBin = bin.filter((item) => {
+      return item.id !== id
+    })
+    setBinTodos(newBin);
+    const todos = JSON.parse(localStorage.getItem("todo"));
+    const newTodos = [...todos, todo];
+    localStorage.setItem("todo", JSON.stringify(newTodos));
+    localStorage.setItem("bin", JSON.stringify(newBin));
+    setDisplay(true);
+  }
+  const CloseToast = () => {
+    setDisplay(false);
+  }
   return (
     <>
       <div className='flex'>
@@ -40,10 +60,20 @@ const Bin = () => {
           <div className='justify-center flex flex-wrap h-96 overflow-y-scroll '>
             {
               BinTodos.length !== 0 ? BinTodos.map((item, index) => {
-                return <div key={index} className="mx-4 my-3"><Todo props={{ item, DelTodo, bin: true }} /></div>
+                return <div key={index} className="mx-4 my-3"><Todo props={{ item, DelTodo, RestoreTodo, bin: true }} /></div>
               }) : <p>No Todos in Bin.</p>
             }
           </div>
+          <Toast props={{
+            icon: "M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z",
+            heading: "Restored",
+            desc: "Todo was restored.",
+            bg: "#D1FAE5",
+            border: "#10B981",
+            text: "#052e16",
+            display: Display,
+            close: CloseToast
+          }} />
         </div>
       </div>
     </>

@@ -10,6 +10,7 @@ const AddTodo = () => {
     const [Display, setDisplay] = useState(false);
     const Context = useContext(context);
     const { FormUI, setSideNavLft, SideNavLft } = Context;
+    const [HoverCard, setHoverCard] = useState(0);
     useEffect(() => {
         const savedTodos = localStorage.getItem("todo");
         if (savedTodos) {
@@ -66,11 +67,30 @@ const AddTodo = () => {
                         <div className='input flex flex-col'>
                             <label htmlFor="deadline">Todo Deadline</label>
                             <div className='flex max-[400px]:flex-col max-[400px]:space-y-2'>
-                                <input type="date" className='w-40 focus:outline-none border h-12 min-[400px]:border-r-0 rounded-l-lg max-[400px]:rounded-r-lg px-4 focus:border-2 max-[595px]:w-[50%] max-[400px]:w-full' id='deadline' name='deadlineDate' value={Input.deadlineDate} onChange={onChange} style={{ backgroundColor: FormUI.bg, color: FormUI.text, borderColor: FormUI.border }} />
+                                <input type="date" className='w-40 focus:outline-none border h-12 min-[400px]:border-r-0 rounded-l-lg max-[400px]:rounded-r-lg px-4 focus:border-2 max-[595px]:w-[50%] max-[400px]:w-full ' id='deadline' name='deadlineDate' value={Input.deadlineDate} onChange={onChange} style={{ backgroundColor: FormUI.bg, color: FormUI.text, borderColor: FormUI.border }} />
                                 <input type="time" className='w-[9.5rem] focus:outline-none border h-12 rounded-r-lg max-[400px]:rounded-l-lg min-[400px]:border-l-0 px-4 focus:border-2 max-[595px]:w-[50%] max-[400px]:w-full ' id='deadline' name='deadlineTime' value={Input.deadlineTime} onChange={onChange} style={{ backgroundColor: FormUI.bg, color: FormUI.text, borderColor: FormUI.border }} />
                             </div>
                         </div>
-                        <div className='input flex flex-col'>
+                        <div className={`absolute right-48 top-28 border px-4 py-2 rounded-md text-sm ${localStorage.getItem("TodoAppMode")==="light"?"border-black":"border-white"}`} style={{ opacity: HoverCard, transition: "opacity 0.5s" }}>
+                            <div className="flex justify-between items-center space-x-5">
+                                <div className="priorities">
+                                    <p className='font-medium'>h</p>
+                                    <p className='font-medium'>m</p>
+                                    <p className='font-medium'>l</p>
+                                </div>
+                                <div className="colon">
+                                    <p className='font-medium'>:</p>
+                                    <p className='font-medium'>:</p>
+                                    <p className='font-medium'>:</p>
+                                </div>
+                                <div className="Priority">
+                                    <p>High Priority</p>
+                                    <p>Medium Priority</p>
+                                    <p>Low Priority</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='input flex flex-col' onMouseEnter={() => { setHoverCard(100) }} onMouseLeave={() => { setHoverCard(0) }}>
                             <label htmlFor="priority">Priority</label>
                             <input type="text" className=' border focus:outline-none w-16 h-12 rounded-lg px-2 focus:border-2 max-[595px]:w-96 max-[400px]:w-72' id='priority' name='priority' value={Input.priority} onChange={onChange} autoComplete='off' style={{ backgroundColor: FormUI.bg, color: FormUI.text, borderColor: FormUI.border }} />
                         </div>
