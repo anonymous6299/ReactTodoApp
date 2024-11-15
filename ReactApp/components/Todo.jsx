@@ -1,10 +1,9 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom"
 import context from "../ContextAPI/ContextInit";
 const Todo = ({ props }) => {
-    const [Bg, setBg] = useState({ color: "#F9FAFB", border: "#c5c5c5" });
     const Context = useContext(context);
-    const { TodoCardUI, setTodoCardUI } = Context;
+    const { TodoCardUI } = Context;
     const navigate = useNavigate();
     const onClickHandler = (route) => {
         if (!props.bin) {
@@ -26,8 +25,7 @@ const Todo = ({ props }) => {
                                 <p className={`text-2xl font-bold ${TodoCardUI.completed.color === "#bbf7d0" ? "hidden" : "block"}`}>{props.item.deadlineTime} {props.item.deadlineTime.slice(0, 2) > 12 ? "PM" : "AM"}</p>
                             </div>
                             <div className="completeBtn flex">
-                                <input type="checkbox" name={`checkinput-${props.item.id}`} className={`w-10 h-5 mt-2 ${(!(props.item.completed)) ? "block" : "hidden"} cursor-pointer`} onClick={() => { props.MarkAsComplete(props.item.id) }} />
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="transparent" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 mt-2 text-white bg-green-600 rounded-full ${((props.item.completed)) ? "block" : "hidden"}`}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="transparent" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 mt-2 text-white bg-green-600 rounded-full">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 </svg>
         
@@ -49,7 +47,7 @@ const Todo = ({ props }) => {
             )
 
         }
-        else if (props.item.priority.includes("h") && (!(props.item.completed))) {
+        else if (props.item.priority==="h" && (!(props.item.completed))) {
             return (
                 <>
                     <div className={`border w-80 rounded-xl px-4 py-4 hover:shadow-lg ${localStorage.getItem("TodoAppMode")==="light"?"hover:shadow-gray-200":"hover:shadow-gray-700"}`}
@@ -63,7 +61,7 @@ const Todo = ({ props }) => {
                                 <p className={`text-2xl font-bold ${props.bin ? "" : "hover:underline"} hover:cursor-pointer w-fit text-red-600`} onClick={() => { onClickHandler(`/UpdTodo/${props.item.id}`) }}>{props.item.deadlineDay}, {props.item.deadlineDate}</p>
                                 <p className={`text-2xl font-bold ${TodoCardUI.high.color === "#bbf7d0" ? "hidden" : "block"}`}>{props.item.deadlineTime} {props.item.deadlineTime.slice(0, 2) > 12 ? "PM" : "AM"}</p>
                             </div>
-                            <div className="completeBtn flex">
+                            <div className={`completeBtn flex ${props.bin?"hidden":"block"}`}>
                                 <input type="checkbox" name={`checkinput-${props.item.id}`} className={`w-10 h-5 mt-2 ${(!(props.item.completed)) ? "block" : "hidden"} cursor-pointer`} onClick={() => { props.MarkAsComplete(props.item.id) }} />
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="transparent" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 mt-2 text-white bg-green-600 rounded-full ${((props.item.completed)) ? "block" : "hidden"}`}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -88,7 +86,7 @@ const Todo = ({ props }) => {
 
 
         }
-        else if (props.item.priority.includes("m") && (!(props.item.completed))) {
+        else if (props.item.priority==="m" && (!(props.item.completed))) {
             return (
                 <>
                     <div className={`border w-80 rounded-xl px-4 py-4 hover:shadow-lg ${localStorage.getItem("TodoAppMode")==="light"?"hover:shadow-gray-200":"hover:shadow-gray-700"}`}
@@ -102,7 +100,7 @@ const Todo = ({ props }) => {
                                 <p className={`text-2xl font-bold ${props.bin ? "" : "hover:underline"} hover:cursor-pointer w-fit text-red-600`} onClick={() => { onClickHandler(`/UpdTodo/${props.item.id}`) }}>{props.item.deadlineDay}, {props.item.deadlineDate}</p>
                                 <p className={`text-2xl font-bold ${TodoCardUI.med.color === "#bbf7d0" ? "hidden" : "block"}`}>{props.item.deadlineTime} {props.item.deadlineTime.slice(0, 2) > 12 ? "PM" : "AM"}</p>
                             </div>
-                            <div className="completeBtn flex">
+                            <div className={`completeBtn flex ${props.bin?"hidden":"block"}`}>
                                 <input type="checkbox" name={`checkinput-${props.item.id}`} className={`w-10 h-5 mt-2 ${(!(props.item.completed)) ? "block" : "hidden"} cursor-pointer`} onClick={() => { props.MarkAsComplete(props.item.id) }} />
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="transparent" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 mt-2 text-white bg-green-600 rounded-full ${((props.item.completed)) ? "block" : "hidden"}`}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
@@ -141,7 +139,7 @@ const Todo = ({ props }) => {
                                 <p className={`text-2xl font-bold ${props.bin ? "" : "hover:underline"} hover:cursor-pointer w-fit text-red-600`} onClick={() => { onClickHandler(`/UpdTodo/${props.item.id}`) }}>{props.item.deadlineDay}, {props.item.deadlineDate}</p>
                                 <p className={`text-2xl font-bold ${TodoCardUI.low.color === "#bbf7d0" ? "hidden" : "block"}`}>{props.item.deadlineTime} {props.item.deadlineTime.slice(0, 2) > 12 ? "PM" : "AM"}</p>
                             </div>
-                            <div className="completeBtn flex">
+                            <div className={`completeBtn flex ${props.bin?"hidden":"block"}`}>
                                 <input type="checkbox" name={`checkinput-${props.item.id}`} className={`w-10 h-5 mt-2 ${(!(props.item.completed)) ? "block" : "hidden"} cursor-pointer`} onClick={() => { props.MarkAsComplete(props.item.id) }} />
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="transparent" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={`size-6 mt-2 text-white bg-green-600 rounded-full ${((props.item.completed)) ? "block" : "hidden"}`}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />

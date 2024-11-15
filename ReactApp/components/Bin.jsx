@@ -37,10 +37,10 @@ const Bin = () => {
             <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
           <p className='text-center text-3xl my-20'>Your Todos</p>
-          <div className='mx-20'>
+          <div className='justify-center flex flex-wrap h-96 overflow-y-scroll '>
             {
               BinTodos.length !== 0 ? BinTodos.map((item, index) => {
-                return <Todo key={index} props={{ item, DelTodo, bin: true }} />
+                return <div key={index} className="mx-4 my-3"><Todo props={{ item, DelTodo, bin: true }} /></div>
               }) : <p>No Todos in Bin.</p>
             }
           </div>

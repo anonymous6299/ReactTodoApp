@@ -66,8 +66,8 @@ const AddTodo = () => {
                         <div className='input flex flex-col'>
                             <label htmlFor="deadline">Todo Deadline</label>
                             <div className='flex max-[400px]:flex-col max-[400px]:space-y-2'>
-                                <input type="date" className='w-40 focus:outline-none border h-12 border-r-0 rounded-l-lg px-4 focus:border-2 max-[595px]:w-[50%] max-[400px]:w-full' id='deadline' name='deadlineDate' value={Input.deadlineDate} onChange={onChange} style={{ backgroundColor: FormUI.bg, color: FormUI.text, borderColor: FormUI.border }} />
-                                <input type="time" className='w-[9.5rem] focus:outline-none border h-12 rounded-r-lg border-l-0 px-4 focus:border-2 max-[595px]:w-[50%] max-[400px]:w-full' id='deadline' name='deadlineTime' value={Input.deadlineTime} onChange={onChange} style={{ backgroundColor: FormUI.bg, color: FormUI.text, borderColor: FormUI.border }} />
+                                <input type="date" className='w-40 focus:outline-none border h-12 min-[400px]:border-r-0 rounded-l-lg max-[400px]:rounded-r-lg px-4 focus:border-2 max-[595px]:w-[50%] max-[400px]:w-full' id='deadline' name='deadlineDate' value={Input.deadlineDate} onChange={onChange} style={{ backgroundColor: FormUI.bg, color: FormUI.text, borderColor: FormUI.border }} />
+                                <input type="time" className='w-[9.5rem] focus:outline-none border h-12 rounded-r-lg max-[400px]:rounded-l-lg min-[400px]:border-l-0 px-4 focus:border-2 max-[595px]:w-[50%] max-[400px]:w-full ' id='deadline' name='deadlineTime' value={Input.deadlineTime} onChange={onChange} style={{ backgroundColor: FormUI.bg, color: FormUI.text, borderColor: FormUI.border }} />
                             </div>
                         </div>
                         <div className='input flex flex-col'>

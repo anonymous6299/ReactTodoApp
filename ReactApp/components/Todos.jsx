@@ -32,19 +32,19 @@ const Todos = () => {
             setCompletedTodos(arr);
             arr = JSON.parse(localStorage.getItem("todo")).filter((item) => {
                 if (item.completed === false) {
-                    return item.priority.includes("h")
+                    return item.priority==="h"
                 }
             });
             setHPriorityTodos(arr);
             arr = JSON.parse(localStorage.getItem("todo")).filter((item) => {
                 if (item.completed === false) {
-                    return item.priority.includes("m")
+                    return item.priority==="m"
                 }
             });
             setMPriorityTodos(arr);
             arr = JSON.parse(localStorage.getItem("todo")).filter((item) => {
                 if (item.completed === false) {
-                    return item.priority.includes("l")
+                    return item.priority==="l"
                 }
             });
             setLPriorityTodos(arr);
@@ -60,17 +60,17 @@ const Todos = () => {
         }
     }
     const DelTodo = (id) => {
-        const arr = [];
+        let bin = JSON.parse(localStorage.getItem("bin"));
         const newTodo = Todos.find((item) => {
             return item.id == id;
         })
-        if (newTodo.priority.includes("h")) {
+        if (newTodo.priority==="h") {
             const arr = HPriorityTodos.filter((item) => {
                 return item.id !== newTodo.id;
             })
             setHPriorityTodos(arr);
         }
-        else if (newTodo.priority.includes("m")) {
+        else if (newTodo.priority==="m") {
             const arr = MPriorityTodos.filter((item) => {
                 return item.id !== newTodo.id;
             })
@@ -88,11 +88,12 @@ const Todos = () => {
         const NcomTodos = CompletedTodos.filter((item) => {
             return item.id !== id
         })
+        
         setTodos(newTodos);
         setCompletedTodos(NcomTodos);
+        bin=[...bin,newTodo];
         localStorage.setItem("todo", JSON.stringify(newTodos));
-        arr.push(newTodo);
-        localStorage.setItem("bin", JSON.stringify(arr));
+        localStorage.setItem("bin", JSON.stringify(bin));
         setHeading("Todo Deleted");
         setDesc("Todo moved to Bin.");
         setDisplay(true);
@@ -107,13 +108,13 @@ const Todos = () => {
         arr[ind] = todo;
         setTodos(arr);
         setCompletedTodos([...CompletedTodos, todo])
-        if (todo.priority.includes("h")) {
+        if (todo.priority==="h") {
             const arr = HPriorityTodos.filter((item) => {
                 return item.id !== id
             })
             setHPriorityTodos(arr);
         }
-        else if (todo.priority.includes("m")) {
+        else if (todo.priority==="m") {
             const arr = MPriorityTodos.filter((item) => {
                 return item.id !== id
             })
@@ -179,7 +180,7 @@ const Todos = () => {
                         </div>
                     </div>
                 </div>
-                <div className={` w-full h-[62%] z-10 relative ${Left} transition-all`}>
+                <div className={` w-full h-[62%] z-10 relative ${Left} transition-all max-[865px]:pt-10`}>
                     <div className={`absolute w-full px-28 max-[1053px]:px-10 justify-between max-[912px]:justify-center flex flex-wrap left-[0%] h-96 max-[768px]:h-52 max-[768px]:px-2 ${Todos.length !== 0 ? "overflow-y-scroll" : ""}`}>
                         {
                             Todos.length !== 0 ? Todos.map((item, index) => {

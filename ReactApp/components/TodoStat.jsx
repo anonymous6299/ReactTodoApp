@@ -11,15 +11,15 @@ const TodoStat = (props) => {
     useEffect(() => {
         const todos = props.todos;
         let arr = todos.filter((item) => {
-            return item.priority.includes("h");
+            return item.priority==="h";
         })
         setHPriTodos(arr);
         arr = todos.filter((item) => {
-            return item.priority.includes("m");
+            return item.priority==="m";
         })
         setMPriTodos(arr);
         arr = todos.filter((item) => {
-            return item.priority.includes("l");
+            return item.priority==="l";
         })
         setLPriTodos(arr);
         arr = todos.filter((item) => {
@@ -29,7 +29,7 @@ const TodoStat = (props) => {
     }, [props.todos])
 
     return (
-        <div className={`TodoStatCard border border-[#c1c4c9] rounded-lg h-fit w-[26rem] py-10 px-8 flex justify-between max-[455px]:flex-col max-[455px]:items-center hover:shadow-lg ${localStorage.getItem("TodoAppMode")==="light"?"hover:shadow-gray-200":"hover:shadow-gray-700"} max-[885px]:w-full max-[455px]:w-[20rem]`} id='todos2' style={{backgroundColor:CardBg,color:CardClr}}>
+        <div className={`TodoStatCard border border-[#c1c4c9] rounded-lg h-fit w-[26rem] py-10 px-8 flex justify-between max-[455px]:flex-col max-[455px]:items-center ${localStorage.getItem("TodoAppMode")==="light"?"hover:shadow-gray-200":"hover:shadow-gray-700"} max-[885px]:w-full max-[455px]:w-[20rem]`} id='todos2' style={{backgroundColor:CardBg,color:CardClr}}>
             <div className='todosAdded w-fit flex flex-col justify-center'>
                 <p className='text-6xl font-medium text-center'>{props.todos.length}</p>
                 <p className='font-medium w-fit'>Todos Added</p>
