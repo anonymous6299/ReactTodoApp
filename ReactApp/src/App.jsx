@@ -7,9 +7,10 @@ function App() {
   return (
     <div className="flex">
     <div><SideNav/></div>
-    <div><Home/></div>
+    <div className="w-full overflow-y-scroll h-[100vh]"><Home/></div>
     </div>
   )
 }
 
 export default App
+
