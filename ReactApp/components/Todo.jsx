@@ -21,8 +21,8 @@ const Todo = ({ props }) => {
                     }}>
                     <div className="flex justify-between">
                         <div className='deadline'>
-                            <p className={`text-2xl font-bold ${props.bin ? "" : "hover:underline"} hover:cursor-pointer w-fit text-red-600`} onClick={() => { onClickHandler(`/UpdTodo/${props.item.id}`) }}>{props.item.deadlineDay}, {props.item.deadlineDate}</p>
-                            <p className={`text-2xl font-bold ${TodoCardUI.completed.color === "#bbf7d0" ? "hidden" : "block"}`}>{props.item.deadlineTime} {props.item.deadlineTime.slice(0, 2) > 12 ? "PM" : "AM"}</p>
+                            <p className="text-2xl font-bold w-fit text-red-600">{props.item.deadlineDay}, {props.item.deadlineDate}</p>
+                            <p className="text-2xl font-bold">{props.item.deadlineTime} {props.item.deadlineTime.slice(0, 2) >= 12 ? "PM" : "AM"}</p>
                         </div>
                         <div className="completeBtn flex">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="transparent" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 mt-2 text-white bg-green-600 rounded-full">
@@ -33,7 +33,7 @@ const Todo = ({ props }) => {
                     </div>
                     <div className={`flex w-full justify-between items-center ${TodoCardUI.completed.color === "#bbf7d0" ? "mt-8" : ""}`}>
                         <div>
-                            <p className={`text-lg font-medium ${props.bin ? "" : "hover:underline"} hover:cursor-pointer`} onClick={() => { onClickHandler(`/UpdTodo/${props.item.id}`) }}>{props.item.title}</p>
+                            <p className="text-lg font-medium">{props.item.title}</p>
                             <p className={`text-sm`}>{props.item.desc}</p>
                         </div>
                         <div className={`border ${localStorage.getItem("TodoAppMode") === "light" ? "border-black" : "border-white"} rounded-full p-1 hover:cursor-pointer ${props.DelTodo ? "block" : "hidden"}`} onClick={() => { props.DelTodo(props.item.id) }}>
@@ -59,7 +59,7 @@ const Todo = ({ props }) => {
                     <div className="flex justify-between">
                         <div className='deadline'>
                             <p className={`text-2xl font-bold ${props.bin ? "" : "hover:underline"} hover:cursor-pointer w-fit text-red-600`} onClick={() => { onClickHandler(`/UpdTodo/${props.item.id}`) }}>{props.item.deadlineDay}, {props.item.deadlineDate}</p>
-                            <p className={`text-2xl font-bold ${TodoCardUI.high.color === "#bbf7d0" ? "hidden" : "block"}`}>{props.item.deadlineTime} {props.item.deadlineTime.slice(0, 2) > 12 ? "PM" : "AM"}</p>
+                            <p className="text-2xl font-bold">{props.item.deadlineTime} {props.item.deadlineTime.slice(0, 2) >= 12 ? "PM" : "AM"}</p>
                         </div>
                         <div className={`completeBtn flex ${props.bin ? "hidden" : "block"}`}>
                             <input type="checkbox" name={`checkinput-${props.item.id}`} className={`w-10 h-5 mt-2 ${(!(props.item.completed)) ? "block" : "hidden"} cursor-pointer`} onClick={() => { props.MarkAsComplete(props.item.id) }} />
@@ -106,7 +106,7 @@ const Todo = ({ props }) => {
                     <div className="flex justify-between">
                         <div className='deadline'>
                             <p className={`text-2xl font-bold ${props.bin ? "" : "hover:underline"} hover:cursor-pointer w-fit text-red-600`} onClick={() => { onClickHandler(`/UpdTodo/${props.item.id}`) }}>{props.item.deadlineDay}, {props.item.deadlineDate}</p>
-                            <p className={`text-2xl font-bold ${TodoCardUI.med.color === "#bbf7d0" ? "hidden" : "block"}`}>{props.item.deadlineTime} {props.item.deadlineTime.slice(0, 2) > 12 ? "PM" : "AM"}</p>
+                            <p className="text-2xl font-bold">{props.item.deadlineTime} {props.item.deadlineTime.slice(0, 2) >= 12 ? "PM" : "AM"}</p>
                         </div>
                         <div className={`completeBtn flex ${props.bin ? "hidden" : "block"}`}>
                             <input type="checkbox" name={`checkinput-${props.item.id}`} className={`w-10 h-5 mt-2 ${(!(props.item.completed)) ? "block" : "hidden"} cursor-pointer`} onClick={() => { props.MarkAsComplete(props.item.id) }} />
@@ -153,7 +153,7 @@ const Todo = ({ props }) => {
                     <div className="flex justify-between">
                         <div className='deadline'>
                             <p className={`text-2xl font-bold ${props.bin ? "" : "hover:underline"} hover:cursor-pointer w-fit text-red-600`} onClick={() => { onClickHandler(`/UpdTodo/${props.item.id}`) }}>{props.item.deadlineDay}, {props.item.deadlineDate}</p>
-                            <p className={`text-2xl font-bold ${TodoCardUI.low.color === "#bbf7d0" ? "hidden" : "block"}`}>{props.item.deadlineTime} {props.item.deadlineTime.slice(0, 2) > 12 ? "PM" : "AM"}</p>
+                            <p className="text-2xl font-bold">{props.item.deadlineTime} {props.item.deadlineTime.slice(0, 2) >= 12 ? "PM" : "AM"}</p>
                         </div>
                         <div className={`completeBtn flex ${props.bin ? "hidden" : "block"}`}>
                             <input type="checkbox" name={`checkinput-${props.item.id}`} className={`w-10 h-5 mt-2 ${(!(props.item.completed)) ? "block" : "hidden"} cursor-pointer`} onClick={() => { props.MarkAsComplete(props.item.id) }} />

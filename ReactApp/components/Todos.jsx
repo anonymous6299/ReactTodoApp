@@ -169,8 +169,8 @@ const Todos = () => {
                             </button>
                         </div>
                     </div>
-                    <div className={`select flex justify-end mx-52 ${SelDis ? "block" : "hidden"}`}>
-                        <div className='flex flex-col'>
+                    <div className={`select absolute flex justify-end right-28 ${SelDis ? "block" : "hidden"}`}>
+                        <div className='flex items-center'>
                             <label htmlFor="priority" className='mx-1 my-1'>Priority:</label>
                             <select name="priority" id="priority" className='bg-[#F9FAFB] border border-[#D1D5DB] text-[#1F2937] w-28 h-9 rounded-lg px-3' value={Priority} onChange={(e) => { setPriority(e.target.value) }}>
                                 <option value="h">High</option>
@@ -181,29 +181,29 @@ const Todos = () => {
                     </div>
                 </div>
                 <div className={` w-full h-[62%] z-10 relative ${Left} transition-all max-[865px]:pt-10`}>
-                    <div className={`absolute w-full px-28 max-[1053px]:px-10 justify-between max-[912px]:justify-center flex flex-wrap left-[0%] h-96 max-[768px]:h-52 max-[768px]:px-2 ${Todos.length !== 0 ? "overflow-y-scroll" : ""}`}>
+                    <div className={`absolute w-full px-12 max-[1053px]:px-10 justify-center flex flex-wrap left-[0%] h-80 max-[768px]:h-52 max-[768px]:px-2 ${Todos.length !== 0 ? "overflow-y-scroll" : ""}`}>
                         {
                             Todos.length !== 0 ? Todos.map((item, index) => {
                                 return <div className='mx-3 my-3' key={index}><Todo props={{ item, DelTodo, bin: false, MarkAsComplete }} /></div>
                             }) : <p>No Todos Found.</p>
                         }
                     </div>
-                    <div className=' absolute w-full left-[100%] h-96 max-[768px]:h-52'>
-                        <div className={`${Priority === "h" ? "block" : "hidden"} absolute w-full justify-between max-[912px]:justify-center flex flex-wrap h-full px-28 max-[1053px]:px-10 max-[768px]:px-2 ${HPriorityTodos.length !== 0 ? "overflow-y-scroll" : ""}`}>
+                    <div className=' absolute w-full left-[100%] h-80 max-[768px]:h-52'>
+                        <div className={`${Priority === "h" ? "block" : "hidden"} absolute w-full justify-center flex flex-wrap h-full px-12 max-[1053px]:px-10 max-[768px]:px-2 ${HPriorityTodos.length !== 0 ? "overflow-y-scroll" : ""}`}>
                             {
                                 HPriorityTodos.length !== 0 ? HPriorityTodos.map((item, index) => {
                                     return <div className='mx-3 my-3' key={index} > <Todo props={{ item, DelTodo, bin: false, MarkAsComplete, bg: { color: "#FEE2E2", border: "#EF4444" } }} /></div>
                                 }) : <p>No Todos Found.</p>
                             }
                         </div>
-                        <div className={`${Priority === "m" ? "block" : "hidden"} absolute w-full justify-between max-[912px]:justify-center flex flex-wrap h-full px-28 max-[1053px]:px-10 max-[768px]:px-2 ${MPriorityTodos.length !== 0 ? "overflow-y-scroll" : ""}`}>
+                        <div className={`${Priority === "m" ? "block" : "hidden"} absolute w-full justify-center flex flex-wrap h-full px-28 max-[1053px]:px-10 max-[768px]:px-2 ${MPriorityTodos.length !== 0 ? "overflow-y-scroll" : ""}`}>
                             {
                                 MPriorityTodos.length !== 0 ? MPriorityTodos.map((item, index) => {
                                     return <div className='mx-3 my-3' key={index} > <Todo props={{ item, DelTodo, bin: false, MarkAsComplete, bg: { color: "#FEF3C7", border: "#F59E0B" } }} /></div>
                                 }) : <p>No Todos Found.</p>
                             }
                         </div>
-                        <div className={`${Priority === "l" ? "block" : "hidden"} absolute w-full justify-between max-[912px]:justify-center flex flex-wrap h-full px-28 max-[1053px]:px-10 max-[768px]:px-2 ${LPriorityTodos.length !== 0 ? "overflow-y-scroll" : ""}`}>
+                        <div className={`${Priority === "l" ? "block" : "hidden"} absolute w-full justify-center flex flex-wrap h-full px-28 max-[1053px]:px-10 max-[768px]:px-2 ${LPriorityTodos.length !== 0 ? "overflow-y-scroll" : ""}`}>
                             {
                                 LPriorityTodos.length !== 0 ? LPriorityTodos.map((item, index) => {
                                     return <div className='mx-3 my-3' key={index} > <Todo props={{ item, DelTodo, bin: false, MarkAsComplete, bg: { color: "#D1FAE5", border: "#10B981" } }} /></div>
@@ -211,7 +211,7 @@ const Todos = () => {
                             }
                         </div>
                     </div>
-                    <div className={`absolute w-full px-28 max-[1053px]:px-10 justify-between max-[912px]:justify-center flex flex-wrap left-[200%] h-96 max-[768px]:h-52 max-[768px]:px-2 ${CompletedTodos.length !== 0 ? "overflow-y-scroll" : ""}`}>
+                    <div className={`absolute w-full px-28 max-[1053px]:px-10 justify-center flex flex-wrap left-[200%] h-96 max-[768px]:h-52 max-[768px]:px-2 ${CompletedTodos.length !== 0 ? "overflow-y-scroll" : ""}`}>
                         {
                             CompletedTodos.length !== 0 ? CompletedTodos.map((item, index) => {
                                 return <div key={index} className='mx-3 my-3'><Todo props={{ item, DelTodo, bin: false, bg: { color: "#bbf7d0", border: "#14532d" } }} /></div>
