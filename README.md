@@ -10,7 +10,7 @@
 - **Priority Task Differentiation**: Tasks are visually distinguished by their priority colors, making it easy to spot high, medium, and low-priority tasks at a glance.
 - **Responsive Design**: Access TodoApp on any device with a user-friendly interface.
 Dark Mode: Switch between light and dark themes for a personalized experience.
-- **Intuitive User Interface**: Enjoy drag-and-drop task reordering and quick action buttons for smooth navigation.
+- **Intuitive User Interface**: Enjoy quick action buttons and an intuitive interface for smooth navigation.
 
 ## Tech Stack
 
@@ -21,7 +21,8 @@ TodoApp is built using the following technologies:
 - **Hosting**: Vercel
 
 ### Links to deployed app (Vercel):
-
+- https://react-todo-app-anonymous-projects-420743fe.vercel.app/
+- https://react-todo-app-git-master-anonymous-projects-420743fe.vercel.app/
 
 ---
 
